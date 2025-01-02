@@ -1,0 +1,3 @@
+1. install ProductX plugin and do configer it.
+2. Goto product > Attribute > Edit color > Select Type : Color.
+3. Go to color Configer terms > edid all color and select Color.

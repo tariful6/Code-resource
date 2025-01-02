@@ -1,0 +1,61 @@
+1. Download install vscode and some extentions
+     - C/C++, Code Runner, C/C++ Extension Pack
+     - search > code runner in vscode setting >
+          checked Code-runner: Clear Previous Output
+          checked Code-runner: Run In Terminal >
+          checked Code-runner: save all files before running >
+     - set keyboard shortcut for code runner > goto keyboard shortcut >
+          search code runner > set shortcul > ctrl + shift + e   
+ 
+2. Download install > mingw gcc compiler for windows
+     - continue > continue > continue >
+       mingw32-base > mark installation > mingw32-gcc-g++ > mark installation >
+       installition > apply changes > apply > close
+
+3. Fix gcc problem ------------------------------
+     - Enviroment variables > User variables > Path > New > C:\MinGW\bin > ok > ok > ok.
+     - Restart vscode and desktop if not work.
+
+4. For check vertions c or c++ -------------------
+     gcc --version
+     g++ --version
+
+5. Set powershell as a default terminal ignore to use bash for c/c++.
+     - ctrl + e > >select Default Profile > PowerShell
+     - never use bash
+
+
+
+6. For Run first C programm ------------------------------------------------------------------
+    - make a file anyname.c
+    - write code there 
+    - for output click on code run btn from top.
+
+7. First C programm ------------------------------------------------------------------
+     #include <stdio.h>
+     int main(){
+       printf("Welcome");
+       return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

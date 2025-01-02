@@ -1,0 +1,17 @@
+1. install paralal packege --------------------
+	npm i react-parallax
+
+2. import this in those component where you want to paralax .........
+	import { Parallax } from 'react-parallax';
+
+3. insert those code under return. and  insert  full div in <Parallax> what you want to paralax
+
+    <Parallax
+        blur={{ min: -50, max: 50 }}
+        bgImage={img} // give here image or image link.
+        bgImageAlt="the dog"
+        strength={-200}>
+	
+	// give here full div what you want to paralax
+
+    </Parallax> 

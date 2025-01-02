@@ -1,0 +1,28 @@
+project emplement : -----------
+  - Features
+  - major tech
+  - libraries
+  - challenge
+  - design
+
+Project idea : --------------
+  - plane ticket
+  - tour planer
+  - tour guide
+  - chat  app
+  - chat gpt
+  - task manager
+  - study
+  - bookshop
+  - tea store
+  - street food
+  - tuitor 
+  - appartment buy sell
+  - hotel management
+  - madical camp
+  - medicine shop
+  - cycle shop
+
+project feature idea : --------------
+ - use chat gpt
+ - explore react awesome

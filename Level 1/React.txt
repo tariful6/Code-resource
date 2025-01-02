@@ -1,0 +1,995 @@
+sitting - workspace - extenctions - emmet - include languages - javascript,javascriptreact
+Create or Start react procect : ======================================================
+	1. open a blank folder in vs code and open git bash .
+	2. npm create vite@latest website-name -- --template react  
+           npm create vite@latest world-tour -- --template react
+	3. cd project-name.
+	   - cd react-core-concept
+	4. npm install react-router-dom localforage match-sorter sort-by
+	5. npm run dev
+
+React is a JavaScript library --------------------------------------------------------
+
+React has three core things :
+    1.Component(functional)
+    2.Jsx(javascript xml)
+    3.Props
+    4.Conditional rendering
+    5.Array of object.
+
+Component : use for simillar type of look different type of data. It is a function.
+            Component name first letter must be capital. function must have html element.
+            It,s extenction must be .jsx. it is a small part of react website.
+           
+
+Jsx : Javascript Xml. It help us to write html in javascript.
+      1. jsx can return only one element. if we want to return multiple elements.
+         we have to make those elements as a array and return that array.
+         or we can return using div or using fragment. <></>.
+      2. Muse use camelCase :
+	  . onclick --- onClick
+          . class --- className
+      3. for template string only we have to use carly braces -- {}
+
+     
+
+
+Css in jsx : ========================================================================== 
+	.In jsx page : const style ={borderRadious:"5px"}
+	   = implement : <div style={style}></div>
+
+	.Inline css in jsx page : -----------------------
+	    = implement : <div style={{color : "red"}}></div> 	
+
+	.External css in jsx page : .bgColor {background-color: "red"}
+	    = implement : <div className ="bgColor"></div> 
+	 NB : Must import ,  export external css file.
+
+Props ================================================================================ 
+        It is a process of pass perameter from one component to anather component.
+	but always we pass peremeter from parent component.and we recived peremeter
+        from child component.
+
+Example : 
+1.Parent component :-------------------------
+      
+     function App(){
+	return(
+	  <>
+	    <Device name="Laptop" price="25000"></Device>
+            <Device name="Phone" price="45000"></Device>
+	  </>
+	) 
+     } 
+     export defult App
+
+1.Child component : --------------------------
+
+     function Device(props){
+	const = {name, price} = props;
+        return(
+	  <>
+	   <h3>The Device : {name} Price : {price}</h3>
+          </>
+	)
+     }
+NB : We use dynamic value using props.
+
+Props with defult perameter and destructure process ====================================
+Example :
+2.Parent component : ---------------------------
+
+      function App(){
+         return (
+           <>
+	     <Device name="Laptop" price="25000"></Device>
+             <Device name="Phone" price="45000"></Device>
+             <Device></Device>  // here it take  defult value.
+           </>
+         ) 
+      }
+      export defult App
+
+2.Child component : --------------------------
+     function Device({name="ABC", price="00"}){
+        return(
+	  <>
+	    <h3>The Device : {name} Price : {price}</h3>
+          </>
+	)
+     }
+NB : props is a process of transfer data, you can pass js value,obj, array function using props.
+     we can only read  props value . we can't change props value.
+
+Conditional Rendering ======================================================================
+
+3-1.Parent component : using if else --------------
+
+      function App(){
+         return (
+           <>
+	     <Todo task="Learn" isDone={true}></Todo>
+	     <Todo task="Core" isDone={false}></Todo>
+           </>
+         ) 
+      }
+      export defult App
+
+3-1.Child component : using if else ---------------
+     function Todo({task, isDone}){
+	  if(isDone){
+	    return <li>Finished {task}</li>
+	  }
+	  else{
+            return <li>Work on {task} </li>
+          }
+     }
+NB : It is a javascript condition depends on prorps value.
+
+
+3-2.Parent component : using tarnary : --------------
+
+      function App(){
+         return (
+           <>
+	     <Todo task="Learn" isDone={true}></Todo>
+	     <Todo task="Core" isDone={false}></Todo>
+           </>
+         ) 
+      }
+      export defult App
+
+3-2.Child component : using tarnary : ---------------
+     function Todo({task, isDone}){
+        return (
+	  <>
+            <li>{isDone ? "Finished" : "Work on"} : {task}</li>
+	  </>
+        )
+     }
+NB : It is a javascript condition depends on prorps value
+    
+
+3-3.Parent component : using and && : if condition true then work --------------
+
+      function App(){
+         return (
+           <>
+	     <Todo task="Learn" isDone={true}></Todo>
+	     <Todo task="Core" isDone={false}></Todo>
+           </>
+         ) 
+      }
+      export defult App
+
+3-3.Child component : using and && : if condition true then work ---------------
+     function Todo({task, isDone}){
+        return (
+	  <>
+            <li>{task} {isDone && " : Done"}</li>
+	  </>
+        )
+     }  // NB : if first condition true then it work.
+
+
+
+3-4.Parent component : using and && : if condition false then work --------------
+
+      function App(){
+         return (
+           <>
+	     <Todo task="Learn" isDone={true}></Todo>
+	     <Todo task="Core" isDone={false}></Todo>
+           </>
+         ) 
+      }
+      export defult App
+
+3-4.Child component : using and && : if condition false then work ---------------
+     function Todo({task, isDone}){
+        return (
+	  <>
+            <li>{task} {isDone || " : Do it"}</li>
+	  </>
+        )
+     }  // NB : if first condition false then second condition will work.
+
+
+Event Handle React ===============================================================
+we have three ways to use event handler :
+
+1.Parrent component : way -1.
+     function App(){
+       const handleClick = ()=>{
+          alert("Clicked")
+      }
+      return (
+        <>
+           <button onClick={handleClick}></button>
+        </>
+       )
+     }
+     export defult App
+
+
+2.Parrent component : way -2.
+     function App(){
+      return (
+        <>
+           <button onClick={()=> {alert("clicked")}}></button>
+        </>
+       )
+     }
+     export defult App
+
+
+3.Parrent component : way -3 : pass perameter.
+     function App(){
+       const handleClick = (num)=>{
+          alert("Clicked" + num)
+      }
+      return (
+        <>
+           <button onClick={()=>handleClick(3)}></button>
+        </>
+       )
+     }
+     export defult App
+
+
+useState ================================================================
+  useState is a react hook. we use it to ignore dom. useState remember changeable state.
+  always insert   useState upper side of return or outside of return.
+  NB : main state not change directly.
+ 
+1.Parrent component : --------------------- 
+     
+     function App(){
+       return (
+        <>
+           <Team></Team>
+        </>
+       )
+     }
+     export defult App
+
+
+1.Child component : ------------------------
+     import { useState } from "react"
+     function Team(){
+        const [team, setTeam] = useState(0);
+        const handleClick = ()=>{
+          const addNum = team + 1
+          setTeam(addNum) 
+        }
+ 	return(
+	  <>
+	    <h3>Player : {team}</h3>
+            <button onClick={handleClick}></button>
+	  </>
+	)
+     }
+
+
+useEffect ================================================================
+  useEffect is a javascript hook. we use useEffect load data, send data, manage data, and data loading,
+  error handleing. useEffect take two things. arrow function and dependency must [].
+  when we use useEffect we have to use useState must because Data can come from server or not come.
+  For store data in state. thats why we have to use state must. 
+
+1.Parrent component : -------------------------- 
+     import Users from "./User"; // import child.
+     function App(){
+       return (
+        <>
+           <Users></Users>
+        </>
+       )
+     }
+     export defult App
+
+1.Main Child component : ---------------------------
+import { useState , useEffect } from "react"
+     function Users(){
+        const [users, setUsers] = useState([]);
+	useEffect(()=>{
+          fetch("http://........................")
+            .then(res=> res.json())
+            .then(data => setUsers((data))
+        },[])
+        const handleClick = ()=>{
+            const addNum = team + 1
+            setTeam(addNum) 
+        }
+ 	return(
+	  <>
+	    {
+             users.map(user => <Users user={user}><Users>) // here we pass props
+            }
+	  </>
+	)
+     }
+     export defult Users
+
+1.Child component : ----------------------------- 
+     function User ({user}){
+       return (
+        <>
+           <h3>Name : {user.name}</h3>
+           <h4>email : {user.email}</h4>
+        </>
+       )
+     };
+     export defult User;
+
+Import - Export Vanila Js ==================================
+
+Export : Vanila js from utility : -----------------------
+1.In Js file :
+   const add(first, second)=>{
+      return first + second;
+   }
+   export defult add
+NB : you can export one component use as a defult from jsx.
+
+1.Main jsx file :
+  import add from "./../../location";
+
+2.For export multiple function : -------------------------
+
+2.In Js file :
+   const adition(first, second)=>{
+      return first + second;
+   }
+
+   const multiplex(first, second)=>{
+      return first * second;
+   }
+   export {sum, multiplex}
+
+NB: For return multiple function you can use {}, []. but you can't use default. 
+
+2.Main jsx file :
+  import {sum, multiplex} from "./../../location";
+
+Import file long name convert into short name ====================
+
+1.In Js file :
+   const adition(first, second)=>{
+      return first + second;
+   }
+
+   const devideFirstNumToAnather(first, second)=>{
+      return first / second;
+   }
+   export {adition, devideFirstNumToAnather}
+
+
+1.Main jsx file :
+  import {adition, devideFirstNumToAnather as devide} from "./../../location";
+
+NB : We can convert big file name into short file name using - as .
+
+
+Save data in local storage =============================================
+
+     localStorage.setItem("anyName" , data)
+
+     localStorage.setItem("card" , '1234')
+NB : local stroge only can store string . if we want to store array we have to stringfy it : 
+     localStorage.setItem("card" , JSON.stringfy([]))
+
+     localStorage.getItem("get-item-name")
+     localStorage.getItem("card")
+
+NB : if we want to get stringfy data we have to convert it into parse. we can't use stringfy data       directly.
+     const jsonData = localStorage.getItem("card")
+     const convertJsonToParse = JSON.parse(jsonData )
+   
+
+    const getStoreCart = () => {
+       const storeCartString = localstorage.getItem("cart");
+	   if(storeCartString){
+		return JSON.parse(storeCartString)
+	} 
+	return []
+    }
+
+
+     localStorage.removeItem("remove-item-name")
+     localStorage.removeItem("card")
+
+
+Propstype ===============================================================
+  we use it to handle error. we export component with proptype.
+  1. npm i prop-types
+  2. import PropTypes from 'prop-types';
+  
+  3. insert it before export component name or upper side of component.	
+  3. Cart.propTypes = {
+  	cart: PropTypes.array.isRequired, // use this if recived array types props.
+	bottle : PropTypes.object.isRequired, // use this if recived array object types props.
+	handleAddtoCart : PropTypes.func.isRequired, // use this if recived function types props.
+     }
+
+
+React Icon ================================================================================
+   1.npm i react-icons
+   2. import { FaBeer } from "react-icons/fa";  // icon name and icon type.
+   3. <FaBeer />   // icon name
+
+For find data from all react file : -----------------------------------------------------
+   ctrl + shift + f
+
+
+React Router setup ========================================================================
+
+
+npm create vite@latest name-of-your-project -- --template react
+1. cd file-name
+2. npm install react-router-dom localforage match-sorter sort-by
+3. npm run dev
+
+4. import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+5. const tarifulRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello world!</div>,
+   },
+ ]);
+
+6. <RouterProvider router={tarifulRouter} />
+
+
+Loader use case Params or local json -----------------------------------------------------------------
+ 1. For load dynamic user from local json data ---------
+      path : "/phones/:id", 
+      loader: () => fetch("/phones.json") // for get dynamic id from local json.
+      element: <Phone></Phone>
+
+      const {id} = useParams() // we use it for filter
+      const post = useLoaderData() // it load all user from json.
+      <Link to={`/phones/${id}`}> <button >See Details</button></Link>
+
+ 2. For load dynamic user from server json data ---------
+      loader : ()=> fetch("https://jsonplaceholder.typicode.com/users"),
+      const post = useLoaderData() // it load all user from json.
+
+
+      path : "/user/:userId", // for load single spacific data from multiple data.
+      loader : ({params})=> fetch(`https://jsonplaceholder.typicode.com/users/${params.userId}`),
+      element: <UserDetails></UserDetails>
+
+      const user = useLoaderData() // it load only one user from json.
+      <Link to={`/user/${id}`}>Show Details</Link>
+
+
+     const post = useLoaderData() // it get data from loader.
+     const navigate = useNavigate() // for navigate one place to anather place.
+     const navigation = useNavigation()  // 
+     <Outlet></Outlet>
+
+     <Link to="/">Home</Link> 
+
+     nav a.active{ text-decoration : underline}  // add this in css file and & import this css file in header component.
+    <NavLink to="/" >Home</NavLink>  // for custom css active route navber.
+
+    For Tailwind active route navber : 
+    <NavLink to='/favourites' className={({isActive, isPending})=> isPending ? "pending" : isActive ? " border-b-2  border-green-500 " : ""}>Home</NavLink>
+
+form ------------------------------------------------------------
+     e.preventDefault(); // for solve form reload problem.
+     <form onSubmit={handleFormSubmit}>
+     <input onChange={handlePasswordSubmit} className="border-2"
+     e.target.value // for get function parameter value.
+     const name = e.target.name.value // for get form input field value.
+
+
+React page component satup---------------------------------
+    components - Layout - MainLAyout.jsx -
+    components - Header - Header.jsx - 
+    components - Footer - Footer.jsx - 
+
+    components - Pages - Home - Home.jsx -
+    components - Pages - About - About.jsx -
+    components - Pages - Bloges - Bloges.jsx -
+
+    components - Route - Route.jsx - 
+
+
+local storage usecase------------------------------------
+
+  1. const addedFavouriteArray = []; 
+  2. const favouriteItemas = JSON.parse(localStorage.getItem("favourites"))
+  3. if(!favouriteItemas){ // if favourites not found then go.
+            addedFavouriteArray.push(phone) 
+            localStorage.setItem("favourites", JSON.stringify(addedFavouriteArray)); 
+            alert("Product added")
+      }
+   4. else{ // if favourites found then go.
+            const isExits = favouriteItemas.find(phone => phone.id === id); 
+            if(!isExits){ 
+                addedFavouriteArray.push(...favouriteItemas, phone)  
+                localStorage.setItem("favourites", JSON.stringify(addedFavouriteArray)); 
+                alert("Product added")
+            }else{
+                alert("Product already added sorry")
+          }
+
+ 
+Firebase : ===============================================================================
+  firebase is a software backend system.
+     authentication, authorization
+     login === sign in
+     register === sign up	
+
+1. create a firebase folder in src make a file firebase.init.js 
+2. npm install firebase  // insert this in bash.
+3. add those in firebase.init.js file -----
+
+      import { getAuth } from "firebase/auth";   // we add after. for import getAuth.
+
+      import { initializeApp } from "firebase/app";
+      const firebaseConfig = {
+  	  apiKey: "AIzaSyCMiSeEBvW2rIOPvU2XetxdrU6n4uhO4pE",
+  	  authDomain: "basic-firebase-f19f7.firebaseapp.com",
+  	  projectId: "basic-firebase-f19f7",
+  	  storageBucket: "basic-firebase-f19f7.appspot.com",
+  	  messagingSenderId: "69789299404",
+  	  appId: "1:69789299404:web:e4281c8a8fe9161147c869"
+	};
+
+  // Initialize Firebase -------------------------------------------
+     const app = initializeApp(firebaseConfig);
+     const auth = getAuth(app)  // we add after.
+     export default auth; // we add after for make work easy.
+
+4. Do enable signin method from build > authentication > signIn method --
+
+5. Add those in login jsx file  for Authentication ==================================== 
+  
+   import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+   import auth from "../../../firebase/firebase.init";
+
+   const [user, setUser] = useState(null) // add this in Component before start return.
+   
+   const googleProvider = new  GoogleAuthProvider() // for google connection.
+   const githubProvider = new  GithubAuthProvider()  // for github connection.
+
+
+  1. For google authentication ----------------------------------------------------------
+
+       const handleGoogleSignin = ()=> { // for event handle. & and add this in button.
+         signInWithPopup(auth, googleProvider) // for popup and user configration
+                    // one peramete is auth who come from firebase.init.js file
+                   // and anather come form google connection. we can give sny name here.  
+         .then(result => {
+            const loginUser = result.user; // for get user data.
+            console.log(loginUser);
+	    setUser(loginUser)
+           })
+        .catch(error => {
+            console.log('error', error.message); // for see error
+           })
+       }
+  
+
+   2. For github authentication ----------------------------------------------------------
+
+       const handleGithubSignin = ()=> { 
+           signInWithPopup(auth, githubProvider)
+           .then(result => {
+            const loginUser = result.user; // for get user data.
+            setUser(loginUser);
+          })
+         .catch(error => {
+            console.log('error', error.message); // for see error
+         })
+       }
+
+   3. Login with email password and forget password -----------------------------------------------------
+
+       import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+       import auth from "../../../firebase/firebase.init";
+       import { useRef, useState } from "react";
+
+       const [loginError, setLoginError] = useState("")
+       const [loginSuccess, setLoginSuccess] = useState("")
+       const emailRef = useRef(null) // use for forget password.use it in email. -- rar={emailRef}
+
+     1. const handleLogin = e =>{ // event handeler for email password login. use it in form.
+           e.preventDefault();
+           const email = e.target.email.value;
+           const password = e.target.password.value;
+           console.log(email, password);
+           setLoginError("")
+
+           signInWithEmailAndPassword(auth, email, password) // for login with email password.
+           .then(result => {
+               console.log(result.user);
+               setLoginSuccess("user login successfully")
+           })
+           .catch(error =>{
+            console.error(error);
+            setLoginError(error.message);
+          })
+        }
+
+    2. const handleForgetPassword = () => { // for recover accound password.
+           const email = emailRef.current.value;
+           if(!email){
+                console.log("send reset email", emailRef.current.value);
+                return;
+           }
+             else if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)){
+                console.log("write a valid email");
+                return;
+          }
+                                              
+           sendPasswordResetEmail(auth, email)  // for send validation mail ----------
+          .then(()=> {
+               alert("check your mail")
+           })
+           .catch(error => {
+               console.log(error);
+          })
+
+        }
+
+     1/2 - html referance -------------------------------------
+
+           //  <form onSubmit={handleLogin}>
+          //  <input className="px-3 py-2 bg-slate-100 w-full my-2" type="email" name="email" placeholder="email" ref={emailRef} />
+	 //  <p onClick={handleForgetPassword}>Forget Password</p>
+
+   4. for registration -------------------------------------------------------------
+
+       import {createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+       import auth from './../../../firebase/firebase.init';
+       import { useState } from "react";
+
+       const [registerError , setRegisterError] = useState("")
+       const [success , setSuccess] = useState("")
+       const [showPassword, setShowPassword] = useState(false)
+
+
+       const handleRegister = e => {
+            e.preventDefault();
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+            const acceped = e.target.terms.checked;
+        
+            setRegisterError(""); // for reset or clear error state data ---
+            setSuccess("");  // for reset or clear error state data ---
+
+           if(password.length < 6){  // for password validation.
+                setRegisterError("pass must be give allast 6");
+               return
+
+           }else if(!acceped) { // for agree condition validation.
+                setRegisterError("you have to accept terms and conditions");
+               return
+           }
+
+           createUserWithEmailAndPassword(auth, email, password)  // for create user with email pass-
+          .then(res=> {
+               console.log(res.user);
+             if(res.user.emailVerified){ // for check email is valid or not.
+                  setSuccess("user created successfully")
+              }else{
+                  alert("veryfy your email adress")
+              }
+
+              sendEmailVerification(res.user)  // for send varification email when we create accound ----
+              .then(()=> {
+                alert("check your mail and verify")
+              })
+
+           })
+           .catch(error => {
+               console.error(error);
+            setRegisterError(error.message);
+          })
+        }
+
+   0. For signOut  or logout -----------------------------------------------------
+
+        const handleSignOut = () =>{  // for sign out event handler
+           signOut(auth)   // for sign out .
+           .then(result => {
+               console.log(result);
+               setUser(null);
+           })
+           .catch(error => {
+            console.log('error', error.message); // for see error
+          })
+        }
+
+Firebase Again : ============================================================
+1. setup react-router : make a folder Router and make a file Router.jsx in Router
+   folder. and do configer router configer. 
+
+2. satup firebase > firebase.init.js file with export auth.
+   (i)  npm install firebase
+   (ii) make firebase.config.js file in firebase folder. and push those code here.
+	
+        import { getAuth } from "firebase/auth";
+        import { initializeApp } from "firebase/app";
+
+         const firebaseConfig = {
+            apiKey: "AIzaSyAaTDRgSsZDWYVW9YKOQdCR7IzKx1C3SSA",
+            authDomain: "authentication-7ff0a.firebaseapp.com",
+            projectId: "authentication-7ff0a",
+            storageBucket: "authentication-7ff0a.appspot.com",
+            messagingSenderId: "659654678495",
+            appId: "1:659654678495:web:10a8a2a20fa60204e2d66a"
+          };
+
+         // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            export default auth;
+ 
+3. Setup firebase authentication : ------
+   (i)  enable sign in method from build > authentication > signIn method = google,
+        github,facebook, twitter, email/password, etc.
+   
+   (ii) make a providers folder > in src. make AuthProvider.jsx file in providers.
+   
+   (iii) Push those code in AuthProvider.jsx. and chill.
+    	
+         (a) for import file. add those codes who is necessery or if auto import not work ------------------
+              import {GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+      
+              import { createContext, useEffect, useState } from "react";  // for Context api, useState, useEffect. // must use.
+              import PropTypes from 'prop-types';  // for propstype error handle .
+              import auth from './../firebase/firebase.init';  // we import auth from firebase.init.js. // must use.
+              
+              const googleProvider = new GoogleAuthProvider()  // for google provider. use it if you want to login eith google.
+
+              export const AuthContext = createContext(null);  // cretate context  api for easily get data from any where. // must use.
+
+         (b) what code we use in AuthProvider component---------------
+
+              const AuthProvider = ({children}) => { // we recived props as a children from main.jsx.
+
+              const [user, setUser] = useState(null); // for observer .
+              const [loading, setLoading] = useState(true); // for solve reload problem > it autometiclly navigate in Home page when we reload page.
+
+            (1) for email password  create user  ---------------------------------
+                  const createUser = (email, password)=>{
+                  setLoading(true) // for solve navigate problem.
+                  return createUserWithEmailAndPassword(auth, email, password)
+                 }
+
+            (2) for email password login user  ---------------------------------
+                  const signInUser = (email, password)=>{
+                  setLoading(true) // for solve navigate problem.
+                  return signInWithEmailAndPassword(auth, email, password)
+                 }
+
+            (3) for login using google  ---------------------------------
+                  const signInWithGoogle = () => {
+                  setLoading(true) // for solve navigate problem.
+                  return signInWithPopup(auth, googleProvider)
+                 }
+
+            (4) for login using Github---------------------------------
+
+ 
+            (5) for logOut user  ---------------------------------
+                 const logOut = ()=>{
+                 setLoading(true) // for solve navigate problem.
+                 return signOut(auth) 
+                }
+
+            (6) for observer : it remember user data and user exists or not : must use ---------
+                useEffect(()=>{
+                   const unSubscribe = onAuthStateChanged(auth, currentUser => {
+                   setUser(currentUser);
+                   setLoading(false) // for solve navigate problem.
+                   console.log("observing current useer" , currentUser);  
+                 });
+                 return () => {
+                   unSubscribe();
+                 }
+          
+               },[])
+
+              const authInfo = {user, createUser, signInUser, logOut, loading, signInWithGoogle} // send props for call those any where.
+	
+	    (7) some work under component return for context api-------------------------
+                return (
+                   <AuthContext.Provider value={authInfo}> // we make - AuthContext in top for context api. 
+                      {children} // component props.
+                   </AuthContext.Provider>
+                  );
+                };
+
+               export default AuthProvider;
+
+               AuthProvider.propTypes = { // for props type .
+                  children: PropTypes.node
+               }
+
+    (iv) use or push AuthProvider in main jsx for context api ------------
+	  import AuthProvider from './providers/AuthProvider.jsx' // for import auth provider.
+
+	  <React.StrictMode>
+              <AuthProvider> // AuthProvider component.
+                 <RouterProvider router={myRouter} />
+              </AuthProvider>
+            </React.StrictMode>, 
+
+4. private routes  for secure route ------------------------------------
+    (a) make a routes folder in src. make a PrivateRoutes.jsx file in routes folder.
+    (b) Push those code in PrivateRoutes.jsx and chill.
+         (i) for import file. add those codes who is necessery or if auto import not work ------------------
+              import { useContext } from "react"; // for context api.
+              import { AuthContext } from "../providers/AuthProvider"; // for context api what we make as a AuthProvider.
+              import { Navigate } from "react-router-dom"; // for  navigate route.
+              import PropTypes from 'prop-types'; // for props type .
+         
+	(ii) what code we use in AuthProvider component---------------
+	      const PrivateRoutes = ({children}) => { // children is a props. it is that what we want to make private.
+              const { user , loading } = useContext(AuthContext) //   user , loading come from AuthContext.
+
+                 if(loading){
+                    return <div className=" text-4xl text-red-300">Loading...</div> // for loading speaner if loading  found.
+                 }
+
+                 if(user){   // if user found it return user.
+                     return children;
+                 }
+                 return <Navigate to="/login"></Navigate> // if user not found it navigate to login.
+                 };
+
+                 export default PrivateRoutes;
+
+                 PrivateRoutes.propTypes = {  // for props type .
+                    children: PropTypes.node
+                 }
+
+          (iii) use or push PrivateRoutes in Router.jsx for private route ------------
+                 {
+                   path: "/order",
+                   lement: <PrivateRoutes><Order></Order></PrivateRoutes>
+                 }
+
+5. implement firebase in component forms, header ------------------------------------
+	(a) usecase in header -----------------------------------------------------
+	     (i) for import file -------------------------------
+                   import { useContext } from "react";
+                   import { Link, NavLink } from "react-router-dom";
+                   import { AuthContext } from "../../providers/AuthProvider";
+	   
+	     (ii) add those in Header  component ---------------------------------
+                    const {user, logOut} = useContext(AuthContext)
+
+                    const handleLogout = () => { // for logout event handler.
+                         logOut() // come from AuthProvider.
+                        .then(() => {
+                            console.log("logout successfully");
+                        })
+                       .catch(error => {
+                           console.error(error)
+                        })
+                      }
+
+		     const navLinks = <> // for daisy ui responsive navbar.
+                          <li><NavLink to='/'>Home</NavLink></li>
+                          <li><NavLink to='/login'>Login</NavLink></li>
+                          {
+                              user && <><li><NavLink to='/order'>Order</NavLink></li></> // for private route.
+                          }
+                          </>
+
+	      (iii) maybe important for Header jsx  ---------------------------------
+		     <div className="navbar-end"> // implement in dasisy ui responsive navber end.
+                       {
+                         user ? <> // if user found it show user name and logout btn.
+                            <span>{user.email}</span>
+                            <a onClick={handleLogout} className="btn">logout</a> // here we add logout event handler.
+                            </> 
+                             :
+                           <Link to="/login"><span>Login</span></Link> // if user not found it navigate to login.
+                       }
+        	     </div>
+
+          (b) usecase in registration-----------------------------------------------------
+	       (i) for import file -------------------------------
+		    import { useContext } from "react";
+                    import { Link } from "react-router-dom";
+                    import { AuthContext } from "../../../providers/AuthProvider";
+
+	       (ii) add those in Registration component ---------------------------------
+		    const {createUser} = useContext(AuthContext) // come from AuthProvider.
+                    console.log(createUser);
+
+                   const handleRegister = e => { // event handler for registration.
+                        e.preventDefault(); // for solve form reload problem.
+
+                        const name = e.target.name.value; // for get value from form input field.
+                        const email = e.target.email.value;
+                        const password = e.target.password.value; // for get value from form input field.
+                        console.log(name,email, password);
+   
+
+                        createUser(email, password) // for create user. &  it come from AuthProvider.
+                       .then(result => {
+                            console.log(result);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                     }
+
+
+              (iii) maybe important for Registration jsx  ---------------------------------
+			<form onSubmit={handleRegister} className="card-body"> // add here event handler.
+                            <input type="email" placeholder="email" name="email" className="input input-bordered" required /> // give name here.
+                            <input type="password" placeholder="password"   name="password"  className="input input-bordered" required />  // give name here.
+                            <div className="form-control mt-2">
+                               <button className="btn btn-primary">Register</button>
+                            </div>
+                        </form>
+                       <p className=" p-4">already have acc? <Link to="/login">login now</Link></p> // give here toggle route.
+		
+
+          (c) usecase in login-----------------------------------------------------
+   	       (i) for import file -------------------------------
+                     import { useContext } from "react";
+		     import { Link, useNavigate } from "react-router-dom";
+		     import { AuthContext } from "../../../providers/AuthProvider";
+
+	       (ii) add those in Login component ------------------------------------
+		      const {signInUser , signInWithGoogle} = useContext(AuthContext) // come from  AuthProvider for email login & google login.
+                      const navigate = useNavigate() // for navigate.
+		   
+		    (1) login using email password -----------------------------------
+                          const handleLogin = e => { // event handler for email pass login.
+                              e.preventDefault(); // for solve form reload problem.
+                              const email = e.target.email.value;  // for get value from input field.
+                              const password = e.target.password.value;  // for get value from input field.
+                              console.log(email, password);
+                  
+                              signInUser(email, password)  // for login or signin using email, pass--------
+                              .then(res =>{
+                                  console.log(res.user);
+                                  e.target.reset(); // for clear form field.
+                                  navigate("/")
+                              })
+                              .catch(error => {
+                                  console.error(error);
+                              })
+                           }
+
+  		    (2) login using google -----------------------------------
+                          const handleGoogleSignin = () =>{  // event handler for google login.
+                               signInWithGoogle() // for login or signin using google--------
+                               .then(result => {
+                                    console.log(result.user);
+                                    navigate("/")
+                                })
+                                .catch(error => {
+           			    console.error(error);
+                                })
+                             }
+
+             (iii) maybe important for Login jsx  ---------------------------------
+		     <form onSubmit={handleLogin} className="card-body">  // event handler for email sign in.
+               		 <input type="email" placeholder="email" name="email" className="input input-bordered" required />
+               		 <input type="password" placeholder="password" name="password"  className="input input-bordered" required />
+                	 <div className="form-control mt-2">
+                	    <button className="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+		    <p className=" p-4">New Here? <Link to="/register">Register</Link></p> // give here toggle route.
+                    <button onClick={handleGoogleSignin} className="px-3 py-2 border  bg-green-300">Google login</button> // event handler for google sign in.
+            
+
+
+
+
+

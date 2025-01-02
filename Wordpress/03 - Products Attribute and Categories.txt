@@ -1,0 +1,135 @@
+Products ====================================================== 36m
+    1. Categories : work for create delete update categories.
+	  (a) Create Product Main Cetegory : Go to Product > categories :
+	       Name : give Cetegory Name :  Man
+	       Slug : give Cetegory Name as a small letter : man
+	       Description : give here cetegory base description.
+	       Display type : select - Both. --- add a new category.
+
+          (b) Create Product Sub Cetegory : Go to Product > categories :
+	      Name : give Sub Cetegory Name .
+   	      Parent category : Select Parent category > Add new category.
+
+          (c) Delete Uncategorized category : it was a default category.
+	      1. Make one category as a default after doing this you can delete
+	         -- uncategorized category.
+
+    2. Add New : work for create delete update categories.
+		Product Name : give here product name.
+		Product description : give here product descriptions.
+		Product Image : thumbnail image called product image. 
+		Product Gellary : in a single product details page we can see thats product multiple image. 
+		                  - that is  called Product Gellary.
+		Product Categories : after upload images -- select product Mein Categories & sub categories. 
+		Product tags : give here product related keyword for find product easily.
+	
+		Product data : -----------------------------------
+		     = simple product : use for those product who have no variable. 
+		     = grouped product :
+		     = External / Affilate Product :
+		     = Variable Product : use for those product who have multiple variable.
+		
+		     = Product data - simple product  ------------------------------------- 
+			  - simple product General : 
+			       Give -- Regular price (৳ ) and  Sale price (৳ )
+		          - simple product Inventory : 
+			       SKU - Strock unit : give here unique name base on website -- example : FLRS-001
+			       Stock management : Checked it and give -- quantity in quantity field.
+
+
+                         - new  inventory    GTIN, UPC, EAN or ISBN : learn it
+
+
+		 	       Allow backorders : select -  Allow, but notify customer 
+			       Low stock threshold : give here product quantity for strock out alert.
+			       Sold individually : use for one customer can buy one product only in one time.
+
+		           - simple product shipping : 
+			       Weight (kg) : give product weight.
+			       Dimensions (cm) : give product length, width, height.
+
+		           - simple product Linked Product : 
+			       Upsells : it recoment same product multiple verient. when we are buying a product.
+				         - clicked linked products - goto upsells > search products for add.
+			       Cross-sells : it recoment those product in view cart. who, you add in  Cross-sells.
+
+		           - simple product Attribute : 
+		           - simple product Advanced  : 
+
+		      = Product data - Variable product  ------------------------------------- 
+		           - Variable product Inventory : 
+				SKU - Strock unit : give here unique name base on website -- example : FLRSP-001
+				Stock management : Checked it and give quantity.
+				Allow backorders? : select  Allow, but notify customer.
+				Low stock threshold :  give here product quantity for strock out alert.
+
+			   - Variable product shipping : 
+			       Weight (kg) : give product weight.
+			       Dimensions (cm) : give product length, width, height.
+
+		           - Variable product Linked Product : 
+			       Upsells : it recoment same product multiple verient. when we are buying a product.
+			       Cross-sells : when you do product add to card it shows there related product.
+
+		           - Variable product Attributes : 
+				- Goto Products > Attributes > Give name > add attribute.
+				- Goto Configure terms > give product varient name -- and click add new side. 
+
+				- Goto Product > Edit product > Product data -- verient product > attribute.
+				- Click Add existing > and add What attribute you make sometimes before.
+				- Add attribute values What you make sometimes before.
+				- Save attribute.
+
+		           - Variable product Variations : 
+				- click on genarate variations
+				- Default Form Values : set here default Variations value.
+				- Add Price : Add price here for set price for all product
+				- Click on any single variations and set spacific price for spasific product.
+				- Checked - Manage stock - and add product data.
+				- Allow backorders > Allow, but notify customer.
+				- image - give image in all attribute > base on Product size or color > save & change.
+
+
+		           - Variable product Advance : 
+				- keep it default setting.
+
+		      = Product data - grouped product  --------------------------------------------------------
+			   - Add new product > Give Product name > give long & short description > add photo > add gallery photo.
+			   - select Product data > Grouped product > Inventory : 
+				 - SKU : give sku unique id. example - FLRSHP-001
+			   - Grouped Iinked product : 
+				 - Grouped products : search your created products and add those here. for display related product.
+				 - Upsells :
+
+			   - Grouped product Attribute : 
+				  - keep it default setting.
+
+			   - Grouped product Advanced: 
+				  - keep it default setting.
+
+      		      = Product data - Extarnal / Affiliate product : work for Affiliate product -----------------
+			   -  Affiliate product General :
+				  - Product URL : give here product affilate link.
+				  - Button text : give here button name.
+			  	  - Regular price  : give here regular price.
+				  - Sale price  : give here sale price.
+
+	              = Product short description : give here one or two line short description product related.
+
+
+
+
+Contact Form Plugin by Fluent Forms for Quiz, Survey, and Drag & Drop WP Form Builde 
+
+
+
+			
+
+
+		
+		
+
+	
+	 
+
+	

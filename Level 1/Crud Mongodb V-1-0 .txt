@@ -1,0 +1,487 @@
+ What Is Server : -----------------------------------------------
+     A web server stores and delivers content base on your request.
+     server has his own operating system. who work for 24/7.
+     server gives you access base on request and response.
+     client --> request --> server --> search--> database
+     database  --> search--> server --> request  --> client. 
+     many type of server we can see :
+        web server : work for html, css js, image and more
+        application server : work for long running application, pages , data.
+        file server : sharing and storing files a network.
+        database server : soring, managing, and serving database to multiple clients.
+     Server : it provide you data from database. but every server give you data its not possible.
+     Database : it store data organily.
+     client , server, database are called three tier architecture.
+     
+	
+ Client & Server Connection With Request And Response ------------
+     Rest client / Rest api ---> Rest request : -------------->
+	Crud operation : ---------
+	GET : get data from server.
+	POST: post data in server.
+	PUT / Patch: for update data in server.
+	DELETE: delete data from server.
+
+     Rest server <----- Rest response : <------------
+	XML/JSON format
+
+     Request / Response Model :
+	Client -- > Request (Method, Resources, Headers, [Content])   
+        Server --> Response (Status Code, Headers, [Content])
+
+     Request (req) object --------------------------------------
+	request query string
+	parameters
+	body
+	http headers, and so on
+
+     Response (res) object -------------------------------------
+ 	res.send()  // mostly we use it.
+	res.json()
+	res.status() / res.sendStatus()
+	res.set()
+	
+ Node Vs Other Languages ---------------------------------------
+       Node js is not a programming language. it is a javascript runtime.
+       many third perty libraries we can for node js.
+
+       What is node js -------------------------------------------------
+	  rayan dals make it using chrome v8 engine and c++
+	  open source
+	  cross platform
+	  js runtime environment
+	  allow server side scripting
+	  single threaded, non-blocking
+	  capable of asynchronous I/O = input/output
+	  Has event-driven architecture.
+
+       Who use Node js : --------------------- 
+	  eBay
+	  Microsoft
+	  Netflix
+	  GoDaddy
+	  PayPal
+	  Uber
+	  Yahoo
+	  Wikipins
+	  General Electric
+
+       Where we can use Node js : -------------
+	  I/O bound Application
+	  Data Streaming Application
+	  Data Intencive Real time application
+	  Json apis based application
+          Single page application 
+   
+What is Express  ----------------------------------------
+      Express is a web application framework. it make for use node js code easier.
+
+Node Js vs Express js ---------------------------------
+     Express ja :
+	  Web framework
+	  build on node js
+	  focus on server side development
+	  key features - routing, middleware, templating
+	  use cases - building web application, restful apis
+      
+     Node Js :
+	  JavaScript runtime
+	  build on chrome v8 JavaScript engine
+	  focus on general-purpose JavaScript programming
+	  key features - Non-blocking I/O, event-driven programming
+	  use cases - server-side scripting, creating commend line tools.
+
+	  
+What Is Database, DBMS, MongoDB, NoSQL Vs SQL -------------------
+	database is a system who store data organizedly. we can
+        create update delete data here.
+
+     what is (DBMS) - database management system -----------------
+	 dbms is a software who use for manage database. we can 
+	 create update delete data here easily using dbms. 
+
+     Example of some DBMS --------------------------------------
+	 MongoDB
+	 MySQL 
+         PostgreSQL
+	 Neo4i
+	 Oracle
+	 Cassandra etc.
+
+     DBMS Architecture Types -----------------------------------
+	 single Tier Architecture --> client, server, database all component are reside single component.
+	 2-Tier Architecture -->  follow client side Architecture. client accessing using Api.
+	 3-Tier Architecture --> client & server to provide load balancing, enhance DBMS security.
+
+
+     SQL Database -- structured query language -------------------
+	 SQL - structured query language. it is a relational database.
+	 SQL database is a collection of highly structured tables.
+	 each row reflect a data entry, & every column defines a specific information field. 
+         Relational databases are build using the (sql) to create, store, update, retrieve data.
+
+    NoSQL Database -------------------------------------------------
+	 
+	NoSQL database are non-tabular databases and stor data differently.
+	it avoids joins, and easy to scale.
+	The major purpose of using NoSQL is for distributed data stores.
+
+    Type of NoSQL Database -------------------------------------------------
+	Document database : ---
+	    store data in documents similar to json object. it contains pairs
+	    of fields and value. value can be string, number, Boolean, arrays
+	    object.
+	Key-value database : it contains key and values
+	Wide-column stores : store data in table, rows, and dynamic columns
+	Graph database : store data in nodes and edges. nodes store information
+	   about people, places, things, 
+
+Sql vs NoSQL database ------------------------------------------------------
+	Sql database :
+	   Sql database are primary called RDBMS or relational database.
+	   Structure Query language
+	   Sql database are table base database
+	   Sql database have predefined schema
+	   Oracle , Postgres, MySQL, Ms-Sql
+
+	NoSQL database :
+	   Sql database are primary called as non relational or distributed database.
+	   No declarative query language
+	   NoSQL database can be document based, key-value pairs, graph database.
+	   NoSQL databases use dynamic schema for unstructured data.
+	   MongoDB, Redis, Neo4j, Cassandra, Hbase.
+
+
+Advantage of MongoDB Database ---------------------------------------------
+	MongoDb stores data as a json based document. it makes easy to store and retrieve data.
+	MongoDb is easy to scale up or down as per the requirement.
+	MongoDb provides rich feature like indexing, aggregation, file store, etc
+	MongoDb performs fast with huge data.
+	MongoDb provides tools to manage database.
+
+
+Setup node js packege =========================================
+    1. mkdir myapp  // --- for make folder -- mkdir book-shop.
+    2. cd book-shop  // -- for change folder location directory.
+    3. npm init  // for node package initialize. 
+             (a)  enter   enter   enter --- yes.
+
+    3. npm init -y // for node package initialize.  -- start from here.
+    4. npm i express cors mongodb dotenv
+    5. make a index.js file with package.json file.
+    6. Add this in package.json --  inside script - before test ---  "start": "node index.js",
+    7. npm install -g nodemon // install one time if you not insall before. it work for hot trload.
+    8. create .gitignore file -- and  add there ---  node_modules
+
+   09 - create a user > Database Access > add new database user > give username & autogenerate password > Built-in Role >> Add user.
+   10 - go to database > connect > drivers > View full code sample > copy all code >> paste all code in index.js file.
+   10 - insert those code in index.js file.
+              const express = require('express'); // for middleware.
+              const app = express(); 
+              const port = process.env.PORT ||5000; // for port.
+              const cors = require('cors'); // for middleware.
+              const { MongoClient, ServerApiVersion } = require('mongodb'); // we lift up it from bottom.
+              require('dotenv').config(); // for .env file.
+
+      // middleware ----------------------------------------------------------------------
+              app.use(cors());
+              app.use(express.json());
+
+     // for rendeing add those in last bottom ----------------------------------------
+              app.get('/', (req,res)=>{
+                  res.send("server is running")
+              })
+                
+              app.listen(port, ()=>{
+                  console.log(`simple card is running on port ${port}`);
+              })
+
+    11 - liftup in top - uri require('mongodb') - if you do copy code from document. 
+    12 - create a .env file - and insert database user password here for protection. -  add this -  require('dotenv').config()
+              DB_USER=coffeeMaster
+              DB_PASS=XnhIhq2ggB9QEQwA
+
+    13 - do configer uri with env user password and templete strings.
+              const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.rngkdhw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+
+    14 - add .env in .gitignore file.
+
+    15 - do commmit - await client.close()  & await client.connect() & start codeing after - await client.connect();
+
+    16 - make database and database collection - here we show two way to make those - must use it after async try ----------------
+            const coffeeCollection = client.db("coffeeDB").collection("coffee");
+            == const anyCollectionName = client.db("anyDataBaseName").collection("anyDatabaseCollectionName");
+            -- or ------------------------------- 
+            const database = client.db("coffeeDB")
+            const coffeeCollection = database.collection("coffee");
+
+    17 - install sweet alert two for popup and delete confirmations.-----
+            (a) npm install sweetalert2 --- install package in client site using bash.
+            (b) import Swal from 'sweetalert2'  -- insert import before use.
+            (c) go to sweetalert2 examples and choose after what you want to use.
+
+    18 - For post data or  create data send to server from client ====================
+            (a) backend code for post data -------------------------------------------
+                   app.post('/coffee', async(req, res)=>{
+                      const newCoffee = req.body;
+                      console.log(newCoffee);
+                      const result = await coffeeCollection.insertOne(newCoffee) // for insert single data.
+                          res.send(result);
+                   })
+
+             (b) client code for post data -------------------------------------------
+                    const handleAddCoffee = event => { // it is a event handler for form.
+                       event.preventDefault(); // for solve form reload problem.
+                       const form = event.target;
+                       const name = form.name.value;  // for get data from form input field.
+                       const quantity = form.quantity.value;  // for get data from form input field.
+                       const suplier = form.suplier.value;  // for get data from form input field.
+                       const taste = form.taste.value;  // for get data from form input field.
+                       const newCaffee = { name, quantity, suplier, taste} // for make object using form data.
+                       console.log(newCaffee);
+                       fetch('http://localhost:5000/coffee', { // backend api link with route what we make it before in -- app.post
+                           method: 'POST',
+                           headers: {
+                               'content-type': 'application/json'
+                           },
+                           body: JSON.stringify(newCaffee) // convert object in json formet.
+                       })
+                       .then(res => res.json())
+                       .then(data => {
+                           console.log(data);
+                           if (data.insertedId) {
+                              alert("data inserted successfully")
+                           }
+                        })
+                    }
+
+   19 - For get all data from server to client ======================================
+            (a) backend code for post data -------------------------------------------
+                   app.get('/coffee', async (req, res) => {
+                      const cursor = coffeeCollection.find();
+                      const result = await cursor.toArray();
+                         res.send(result);
+                    })
+    
+           (b) client code for get posted data -------------------------------------------
+                   {  // use for load data usinfg loader.
+                      path: "/",
+                      element: <Home></Home>,
+                      loader: () => fetch("http://localhost:5000/coffee")
+                   }
+                
+                   const Home = () => {
+                      const coffees = useLoaderData()  // use for load data.
+                         return (
+                          <> element </>
+                       );
+                    };
+
+   19 - For get single data from server to client ======================================
+            (a) backend code for get single spasific  data -------------------------------------------
+		    app.get('/services/:id',async(req, res)=>{
+        		const id = req.params.id;
+       			const query = {_id: new ObjectId(id)}
+        		const options = {
+           		  projection:{title: 1, price: 1, img:1, description: 1}
+       			}
+      			const result = await serviceCollection.findOne(query, options)
+        		res.send(result)
+    		   })
+
+             (a) backend code for get single  data -------------------------------------------
+   	            app.get('/services/:id', async(req,res)=>{
+       			 const id = req.params.id;
+       			 const query = {_id : new ObjectId(id)}
+       			 const result  = await cleanCollection.findOne(query)
+       			 res.send(result)
+   	            })
+
+
+
+    20 - For delete single data from server and client ======================================
+              (a) backend code for post data -------------------------------------------
+                     app.delete('/coffee/:id', async (req, res) => {
+                          const id = req.params.id;
+                          const query ={_id: new ObjectId(id)}
+                          const result = await coffeeCollection.deleteOne(query)
+                          res.send(result)
+                     })
+
+              (a) client code for delete data ---------------------------------------------------------------------------
+                    (i) parrent component ---------------------------------------------------------------------------- 
+                           const Home = () => {
+                                const loadedCoffees = useLoaderData() // loader data come from route jsx.
+                                const [coffees, setCoffes] = useState(loadedCoffees); // state for dalate date.
+                                    return (
+                                      <div>
+                                         {
+                                              coffees.map(coffee => <CoffeeCart key={coffee._id} coffee={coffee}
+                                              setCoffes={setCoffes} coffees={coffees} ></CoffeeCart>)
+                                          }
+                                       </div>
+                                )};
+                                {// loader data for home jsx------------
+                                  path: "/",
+                                    element: <Home></Home>,
+                                    loader: () => fetch("http://localhost:5000/coffee")
+                                },
+
+                   (ii) child component ----------------------------------------------------------------------------------
+                             const CoffeeCart = ({ coffee, coffees, setCoffes }) => { // threee props are come from parrent.
+                             const { _id, name, quantity, taste, photoUrl } = coffee || {} // destructure coffee object.
+                             const handleDelete = id => { // event handler for delete.
+                                 console.log(id);
+                                 Swal.fire({ // before use swal make sure swal import already.
+                                     title: "Are you sure?",
+                                     text: "You won't be able to revert this!",
+                                     icon: "warning",
+                                     showCancelButton: true,
+                                     confirmButtonColor: "#3085d6",
+                                     cancelButtonColor: "#d33",
+                                     confirmButtonText: "Yes, delete it!"
+                                 }).then((result) => {
+                                        if (result.isConfirmed) {
+                                           fetch(`http://localhost:5000/coffee/${id}`, {  // this id is event handler id .
+                                              method: 'DELETE'
+                                           })
+                                           .then(res => res.json())
+                                           .then(data => {
+                                               console.log(data);
+                                               if (data.deletedCount > 0) {
+                                                  Swal.fire({
+                                                  title: "Deleted!",
+                                                  text: "Your file has been deleted.",
+                                                  icon: "success"
+                                               });
+                                               const remaining = coffees.filter(coffe => coffe._id !== id); // filter data without spasific id what we want to delete.
+                                               setCoffes(remaining) // set filter data.
+                                           }
+                                      })
+                                  }
+                           })}
+                           return (
+                                 <div className="card-body">
+                                    <h2 className="card-title">{name}</h2>
+                                    <div className=" space-x-3">
+                                        <button className="btn btn-primary">View</button>
+                                        <Link to={`updatCoffee/${_id}`}>
+                                            <button className="btn btn-secondary">Edit</button>
+                                        </Link>
+                                        <button onClick={() => handleDelete(_id)} className="btn btn-primary">X</button> 
+                                    </div>
+                                 </div>
+                           )};
+
+
+
+   21 - update single data from server and client ======================================
+            (a) backend code for post data -------------------------------------------
+                add those after get - use for find single data----------------- 
+                app.get('/coffee/:id', async (req, res) => {
+                    const id = req.params.id;
+                    const query = {_id: new ObjectId(id)}
+                    const result = await coffeeCollection.findOne(query)
+                       res.send(result)
+                    })
+
+            (a) add those code after single post - use for update single data-------------
+                app.put('/coffee/:id', async (req, res) => {
+                    const id = req.params.id;
+                    const filter = {_id: new ObjectId(id)};
+                    const options = {upsert : true};
+                    const updatedCoffee = req.body;
+                    const coffee = {
+                        $set: {
+                            name:updatedCoffee.name,
+                            quantity: updatedCoffee.quantity,
+                            suplier: updatedCoffee.suplier,
+                            taste: updatedCoffee.taste,
+                            catagory: updatedCoffee.catagory,
+                            details: updatedCoffee.details,
+                            photoUrl: updatedCoffee.photoUrl
+                          }
+                     }
+                     const result = await coffeeCollection.updateOne(filter, coffee, options);
+                     res.send(result);
+                  })
+
+          (a) client code for update post data ---------------------------------------------------------
+                --- part one ---------------------------
+                { for dynamic loader data for UpdateCoffee jsx ---------
+                     path: "/updatCoffee/:id",
+                     element: <UpdateCoffee></UpdateCoffee>,
+                     loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
+                },
+
+                --- part two --------------------------------------------
+                <Link to={`updatCoffee/${_id}`}> // for dynamic router use it any where.
+                    <button className="btn btn-secondary">Edit</button>
+                </Link>
+
+
+                 --- part three -----------------------------------------
+                 const UpdateCoffee = () => {
+                      const updateCoffee = useLoaderData() // for load data.
+                      const { _id, name, quantity } = updateCoffee || {}; // for destructureing array.
+                      const handleUpdateCoffee = event => { // event handler for form .
+                          event.preventDefault(); // for solve form reload problem.
+                          const form = event.target;
+                          const name = form.name.value; // get form input field value.
+                          const quantity = form.quantity.value;  // get form input field value.
+                          const updateCoffee = { name, quantity } // make form value object.
+                          console.log(updateCoffee);
+                          fetch(`http://localhost:5000/coffee/${_id}`, {
+                             method: 'PUT',
+                             headers: {
+                                 'content-type': 'application/json'
+                             },
+                                 body: JSON.stringify(updateCoffee)
+                             })
+                             .then(res => res.json())
+                             .then(data => {
+                                 console.log(data);
+                                 if (data.modifiedCount > 0) {
+                                     Swal.fire("successfully added");
+                                 }
+                        })}
+                      return (
+                          <form onSubmit={handleUpdateCoffee} className=" space-y-3" >
+                               <div>
+                                 <label>Coffee Name</label>
+                                 <input className=" w-full py-4 px-2 bg-slate-100  rounded-md " type="text" name="name" defaultValue={name} placeholder="coffee name" id="" />
+                               </div>
+                               <div>
+                                  <label>Available Quantity</label>
+                                  <input className=" w-full py-4 px-2 bg-slate-100  rounded-md " type="number" name="quantity" defaultValue={quantity} placeholder="Quantity" id="" />
+                               </div>
+                                 <input className="w-full py-4 px-2  bg-cyan-400 text-white rounded-md" type="submit" value="update product" id="" />
+                           </form>
+                        );
+                     };
+
+
+
+
+    For output ------------------------------------------------------------------------------
+               (a) node index.js // before install nodemon.
+               (b) nodemon index.js   // after install nodemon.
+               (c) http://localhost:5000/
+
+
+mongoDb operator ============================================================================
+   comperission operator --------------------------------------------------------------------
+      $eq -- equal value.
+      $gt -- greather then
+      $lt -- less then
+      $gte -- greather then or egual
+      $lte -- less  then or egual
+      $in -- match any of values in an array.
+      $ne -- match  value that are not equal to the given value.
+      $nin -- match and give those value what i  does not not put in array.
+ 
+   logical operator --------------
+      $ and -- two condition  must work
+      $ not -- reverse 
+      $ nor -- no condition work here 
+      $ or -- one condition must work

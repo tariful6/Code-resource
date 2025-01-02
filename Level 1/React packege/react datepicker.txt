@@ -1,0 +1,8 @@
+npm i react-datepicker
+
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+ const [startDate, setStartDate] = useState(new Date());
+
+<DatePicker className='border p-2' selected={startDate} onChange={(date) => setStartDate(date)} />

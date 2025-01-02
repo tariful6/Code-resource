@@ -1,0 +1,131 @@
+Why use or not use Node js -----------------------------
+   - Use javascript on server side.
+   - highly scalable backend application
+   - single threaded, even driven & work on none blocking I/O
+   - Good for building data intensive, streaming application.
+   - not recommend for  highly  cpu intensive tasks
+
+Node js Architecture -------------------------------------
+   - V8 Engine - Node js runtime
+   - Libue - open source libreary
+
+module ============================================================================
+   local module,,  build in module,,  Third party modules ------------------------
+   local module (we create ) : we can create js file for export import data---------
+        - create local-1.js file...
+        - export anything using module.exports...
+              const add = (param1, param2) => param1 + param2;
+	      const a = 10;
+              module.exports = { a, add };
+
+        - create local-2.js file...
+        - export anything using module.exports...
+              const add = (param1, param2, param3) => param1 + param2 + param3;
+              const a = 20;
+	      module.exports = { a, add };
+
+        - create index.js file...
+        - import anything using require. we can,t require same name so we changed it.
+	       const { a, add } = require("./local-1.js");
+	       const { a: a2, add: add2 } = require("./local-2.js");
+	       console.log(add(2, 3), a);
+	       console.log(add2(20, 30, 3), a2);
+
+
+   build in module (come from node js)------------------------------------------------
+        - replace all baxk slash to front slass for work. copy path from file.
+        - const path = require("path");
+          console.log(
+             path.dirname("/F:/Mission four month/Phero level two/Module 2/Module/index.js")
+          );
+
+	- const path = require("path");
+          console.log(
+             path.parse("/F:/Mission four month/Phero level two/Module 2/Module/index.js")
+          );
+
+Node js file system --------------------------------------------------------------
+  - Syncronusly  -------------------------------------------
+        const fs = require("fs");
+	const readText = fs.readFileSync("./read.txt", "utf-8");
+	console.log(readText);
+
+	const writeText = fs.writeFileSync("./write.txt",readText + "this is my writen text");
+	console.log(writeText);
+
+   - Asyncronusly  -------------------------------------------
+	const fs = require("fs");
+	 fs.readFile("./read.txt", "utf-8", (err, data) => {
+ 	  if (err) {
+            throw Error("Error reading text");
+            }
+            console.log(data);
+          });
+
+	const fs = require("fs");
+	  fs.readFile("./read.txt", "utf-8", (err, data) => {
+          if (err) {
+            throw Error("Error reading text");
+          }
+          console.log(data);
+          fs.writeFile("./write2.txt", data, "utf-8", (err) => {
+           if (err) {
+           throw Error("Error writing data");
+          }
+          console.log("Text written successfully");
+        });
+      });
+
+
+Event driven architecture, create own events -----------------------------------
+   const EventEmitter = require("events");
+   const myEmitter = new EventEmitter();
+   myEmitter.on('birthday', ()=> {
+      console.log('Happy Birthday!');
+   })
+   myEmitter.on('birthday', (gift)=> {
+      console.log(`I will give you ${gift}`);
+   })
+   myEmitter.emit('birthday' , "Watch")
+
+
+Stream and buffer, create your own server --------------------------------------
+   - After run server use this link in browser -- http://localhost:5000/read-file/
+   - create read.txt file. and add there 70000 text. 
+      const http = require('http')
+      const fs = require('fs')
+      const server = http.createServer()
+      server.on('request', (req, res) => {
+         if(req.url ===  "/read-file" && req.method === "GET");
+             const readableSteam = fs.createReadStream(process.cwd() + '/read.txt');
+             readableSteam.on('data', (buffer)=> {
+                res.statusCode = 200;
+                res.write(buffer)
+            })
+            readableSteam.on('end', ()=>{
+               res.statusCode = 200;
+               res.end("The Streaming is over")
+            })
+            readableSteam.on('error', (error)=>{
+               console.log(error);
+               res.statusCode = 500;
+               res.end("The Streaming is over")
+           })
+      })
+      server.listen(5000, () => {
+         console.log("Server is running on port 5000")
+      })
+
+
+
+npm init -y
+npm i express
+npm i -D typescript
+tsc --init
+npm i -D @types/node
+import express from 'express'
+npm i -D @types/express
+
+tsc
+npm i nodemon
+ "start": "nodemon ./dist/app/server.js",

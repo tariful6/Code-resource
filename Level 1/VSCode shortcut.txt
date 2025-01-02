@@ -1,0 +1,5 @@
+Multiline Edit --- Ctrl + Alt + Down-arrow.
+Goto Multilword end --- Ctrl + shift + left-arrow
+Goto Multiline end --- shift + end
+
+copy line down --- Ctrl + shift + D

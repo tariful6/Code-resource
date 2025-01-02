@@ -1,0 +1,30 @@
+Web Server : work for - 
+    handle https or http request
+    serving static files
+    processing dynamic contents
+    load balancing and reverse proxy
+    logging & monitoring
+
+Backend Application :
+    request 
+    validation / security.
+    Business Logic : our service - what we want to do we are doing here. / database
+    process response
+    response : types - Text, xml, json, files. 
+    main Responsibilities :
+      - authentication/authrozitation
+      - validation
+      - datapage asscess
+      - Syncronous communication : 
+      - Asyncronous communication : 
+      - Schedule / cron jobs
+      - Crud operations
+      - Genarate final respons
+	
+Database ---------------------------- 
+    noSql: mongodB
+    Sql: mySql 
+
+Networking --------------------------
+    - Ip
+    - protocol

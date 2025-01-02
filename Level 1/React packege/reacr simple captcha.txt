@@ -1,0 +1,60 @@
+1. install packege -----------------------------------------------------------------------
+      npm install react-simple-captcha
+
+2. flow those instraction in login page ---------------------------------------------------
+
+     import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+
+     const [disabled, setDisabled] = useState(true);
+     const navigate = useNavigate()
+
+     useEffect(()=> {
+        loadCaptchaEnginge(6)
+     },[])
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signInUser(email, password)
+        .then(res => {
+            console.log(res);
+            Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "Your work has been saved",
+               showConfirmButton: false,
+               timer: 1500
+              });
+            navigate("/")
+        })
+        .catch(err => console.log(err))
+      }
+
+
+
+     const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
+        if(validateCaptcha(user_captcha_value)){
+            setDisabled(false)
+        }else{
+            setDisabled(true)
+        }
+     }
+ 
+
+    <form onSubmit={handleSubmit} className="card-body">
+         <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input onBlur={handleValidateCaptcha} type="text" placeholder="captcha" className="input input-bordered" required />
+          </div>
+
+          <div className="form-control mt-6">
+              <inpu disabled={disabled} className="btn btn-primary" type="submit" value="login" />
+          </div>
+     </form>
+
+

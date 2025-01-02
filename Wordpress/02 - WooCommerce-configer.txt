@@ -1,0 +1,140 @@
+1. for setup woocomerce ------------------------------------------------------------
+	1. install WooCommerce and do active.
+	2. go to - Set up my store choose any one base on your project and do continue.
+	3. give your store a name - keep it default name which name already exists.
+	4. select product type cetegory base on your website.
+	5. select your store located where you want to setup your business. > continue.
+	6. get boost with our feature --- unchecked all who already checked. > continue.
+
+	
+2. woocomerce setting configer -------------------------------------------------------
+    
+       1. General tab Discripe and configer :
+	   (a) Store Address Configer : 
+		- Give here all Physical address where you want to establish your business.
+		- Address line 1, Address line 2, City, Country / State, Postcode / ZIP.
+	  
+	   (b) General options Configer : 
+		  1. Selling location(s) : select - sell to speacific contries.
+		  2. Sell to specific countries : give country name where you want to sell product.
+		  3. Shipping location(s) : select - ship to all countries you sell to.
+		  4. Default customer location :  select - shop country/region.
+		  5. Enable taxes : keep enable taxes unchecked.
+		  6. Enable coupons : work for applying cuppon discound.
+		  6. keep -- Calculate coupon discounts sequentially unchecked.
+	   
+	    (c) Currency options : 
+		  1. Currency : select that currncy what you want to use for sell.
+		  2. save changes .
+
+       2. Products tab Discripe and configer :
+	    (a) General : 
+		  1. Shop page : keep it default or select page what you want to make default.
+		  2. Add to cart behaviour : keep checked - Enable AJAX add to cart buttons on archives.
+		  2. for only single product website do checked - Redirect to the cart page after successful addition.
+ 		  3. Placeholder image : give here image id. // for empty product image.
+	          4. Weight unit : select measurement what you want to use.
+		  5. Dimensions unit : select measurement what you want to use.
+		  6. Enable reviews : checked - Reviews can only be left by "verified owners"
+
+	    (b) Inventory : 
+		  1. Hold stock (minutes) : give minutes - if customer do add to card but not placeing order 
+		     then after finished time what we give. product come back in our bucket again.
+		  
+		  2. Notifications : checked what you want.
+		  3. Notification recipient(s) : give here email where you want to recived notification.
+		  4. Low stock threshold : it give you notification when product quantity in low.
+		  5. Out of stock threshold : it give you notification when product quantity is empty.
+		  6. Out of stock visibility : it will show product out of strock. keep it enable base on situation.
+	          7. Stock display format : Always show quantity remaining in stock 
+
+	    (c) Downloadable products : it work for digital products only.
+		  1. File download method : select force download.
+		  1. keep unchecked - Allow using redirect mode (insecure) as a last resort.
+		  2. Access restriction - checked - Downloads require login and also checked 
+		     - Grant access to downloadable products after payment
+		  3. Open in browser : keep it unchecked.
+		  4. Filename : checked - Append a unique string to filename for security.
+
+	    (d) Approved Download Directories  : 
+		  1. No need to changes anythings.
+	    
+	    (e) Advanced : 
+		 1. No need to changes anythings.
+
+       3. Shipping tab Discripe and configer :
+	     (a) Shipping zones :
+		  1. delete shipping and add new shipping zone for separate separate shipping cost :
+		      - add zone > give zone name > give Zone regions.
+			add shipping method > select Flat rate > give shipping cost in cost > create and save.
+		  2. you can give free shiping base on many condition.
+		  3. you also can give area base free shipping.
+		  4. Rest of the world : for set deafult shipping price :  edit > add shipping method >
+		       select Flat rate > give shipping cost in cost > create and save.
+
+
+	     (b) Shipping settings :
+		  1. Calculations : enable --- Hide shipping costs until an address is entered
+
+	     (c) classes :
+		  1. Add shipping class > Give Shipping class name(category name Capital) >
+		      Give Slug name(category name samll) > Give Description.
+		      Example : Furniture  -- furniture -- all are mordern furniture.  
+
+	     (d) Local pickup :
+		  1. do enable - Enable local pickup.
+		  2. add Pickup locations : give here address informations.
+
+       4. Payments tab Discripe and configer :
+		  1. do enable - Cash on delivery - and finished set up.
+		  1. if you want you can give here rules, description etc.
+		  1. Enable for shipping methods : select area where you want to give cash on delivery.
+		  2. do enable - Direct bank transfer - and finished set up.
+		  2. Account details: give bank account deatils : Wp Acacdemy --  017515678 -- MCB -- 1234 -- PKMCB017515678 --  MCBPK.  
+		  2. you can add multiple back accound. 
+
+	5. Accounts & Privacy tab Discripe and configer :
+		  1. enable - checked Enable guest checkout (recommended)
+		  2. enable - checked Enable log-in during checkout
+		  3. enable - checked During checkout
+		  4. enable - checked On "My account" page
+	          5. enable - checked Send password setup link (recommended)
+	          6. enable - checked Remove personal data from orders on request
+                  6. enable - checked Remove access to downloads on request
+                  6. enable - checked Allow personal data to be removed in bulk from orders
+
+	6. Emails tab Discripe and configer :
+		  1. No need to changes anythings.
+
+	7. Integration tab Discripe and configer : it work for geo location.
+		  1. No need to changes anythings.
+	 	  2. learn - MaxMind Geolocation Integration - for use it.
+
+	8. Site visibility : work for site maintainence 
+        
+	9. Advanced tab Discripe and configer :
+	      (a) Page setup :
+		  1. Terms and conditions : create a Terms and conditions page. and add to here.
+	      (b) REST API :
+		  1. No need to changes anythings.
+	      (c) Webhooks :
+		  1. No need to changes anythings.
+	      (d) Legacy API :
+		  1. No need to changes anythings.
+	      (e) WooCommerce.com :
+		  1. Show Suggestions : unckecked - Display suggestions within WooCommerce.
+	      (f) Features :
+		  1. Order Attribution : unckecked - Enable this feature to track and credit channels
+		     and campaigns that contribute to orders on your site
+
+
+
+
+
+
+
+	
+
+		  
+		
+	

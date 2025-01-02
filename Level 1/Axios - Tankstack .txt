@@ -1,0 +1,71 @@
+Axios =======================================================================
+    Get data using normal way ----------------------------------------------
+       useEffect(() => {
+            fetch('http://localhost:5000/coffees')
+            .then(res => res.json())
+            .then(data => console.log(data))
+       },[])
+
+    Get data using  Axios ----------------------------------------------
+       useEffect(()=>{
+        axios.get('/http://localhost:5000/coffees')
+        .then(res => res.json())
+        .then(data => console.log(data.data))
+      },[])
+
+
+    Post data using normal way ----------------------------------------------
+        fetch('http://localhost:5000/coffees',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newProduct)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.insertedId){
+                alert('Coffee Added Successfully');
+                form.reset();
+            }
+        })
+
+   Post data using Axios ----------------------------------------------
+       axios.post('http://localhost:5000/coffees', newProduct)
+       .then(data => console.log(data.data))
+
+   Patch data using Axios ----------------------------------------------
+       axios.patch('http://localhost:5000/coffees', newProduct)
+       .then(data => console.log(data.data))
+
+Tankstack Query =======================================================================
+
+  npm i @tanstack/react-query
+  add all of these in main jsx -------------------
+
+  import { useQuery, useMutation,useQueryClient, QueryClient, QueryClientProvider} from '@tanstack/react-query'
+  const queryClient = new QueryClient()
+
+    <QueryClientProvider client={queryClient}>
+       <AuthProvider />
+ 	   <RouterProvider router={router} />
+       <AuthProvider />
+    </QueryClientProvider>
+
+    Get data using  tanstack ----------------------------------------------
+
+    const {isPending,isError, data : users} = useQuery({
+        queryKey: ['users'],
+        queryFn: async () =>{
+            const res = await fetch('http://localhost:5000/drinks');
+            return res.json();
+        }  
+      })
+
+      if (isPending){
+        return <h1>Loading...</h1>
+      }
+      if (isError){
+        return <h1>{error.message}</h1>
+      }
+

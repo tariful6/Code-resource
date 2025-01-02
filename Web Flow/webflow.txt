@@ -1,0 +1,216 @@
+
+0. How to start a freelance project ------------------------------------------------------
+       - they send me a guest editor request.
+       - take gmail and create a webflow accound.
+       - or make it own and transfer it, before transfer make it dublicate.
+
+
+1. why client choose webflow -------------------------------------------------------------
+   - good management system.
+   - webflow not depend third on party solution. 
+   - good security. 
+   - pixel perfect website.
+
+2. Editor basic =========================================================================
+   - Section and Div --------------------------------------------------------------------
+       three empty boy : Section, container, div block
+
+   - size setting -----------------------------------------------------------------------
+       - use : px, persentage, vh, vw, min W, min H
+       - if any section childs divition size not same for use flex
+          what child is small use there > Min W : 400px
+
+   - Center any div ----------------------------------------------------------------------
+        - give max width in : max W : 1160 for div container.
+        - make margin auto from left, right both side.  
+
+   - typography --------------------------------------------------------------------------
+        - for add new font - > site setting > Fronts > 
+          Choose font from list > select google font > select font size > Add font.
+        - you can add multiple font if it important.
+        - webflow not give you line height autometically. you have to give menually.
+  
+   - Image -------------------------------------------------------------------------------
+      - expoet image from figma using 2x
+      - for decrese image size use image compasure from online.
+      - must download png or svg formet image.
+      - drag drop image > upload image > checked > HiDPI Image  
+
+   - Debaging ----------------------------------------------------------------------------
+       - for solve margin pading problem
+         click on canvas size > canvus setting > enable > Xray mode.
+       - you can see two color > one color is padding c olor, anather margin color. 
+       - see this video again.
+
+   - Navber ------------------------------------------------------------------------------
+       - change navbar color as you want.
+       - for hero section navber > you have to add navber in hero section 
+       - for dropdown menu you can choose > dropWown over right, over left.
+            from Navber settings.
+       - add our own created container for center content in navber Container class.
+       - for add logo in navber > click on brand box and add there image box > upload image.
+       - add margin, pading for fix image.
+       - delete unnessery navlink. and add new navlinks as your wish.
+
+   - hover ---------------------------------------------------------------------------------
+       - add hover class in main class. after adding hover class you can change anything for hover.
+       - for adding transition click on transition > select what you want to transition.
+       - add transition in main class not add in hover class.
+
+   - Combo Classes --------------------------------------------------------------------------
+       - combo Classs is like css class. it work for spasific style.
+       - Select element > Style selector > Add class. 
+
+   - Layout ---------------------------------------------------------------------------------
+       - Block : Margin, Padding ---
+       - Flex  : direction, align, gap ---
+       - Grid  : grid, coloumns, rows, direction, align, gap ---
+       - None  : default
+   
+   - Responsive -----------------------------------------------------------------------------
+       - Select breake point and give style-
+       - adjust padding, margin, size
+       - navber > setting > menu icon for > select device   
+       - for phone and tab use combo class for change flex direction
+       - for solve image overflow issue use max W : 100%
+       - overflow : auto - work for scroll 
+       - overflow : hidden - work for overflow content hidden
+       - for customize navmenu > select Nav Menu > select tab or mobile breake point > setting >
+          visibility > visible 
+
+   - Hero Section ----------------------------------------------------------------------------
+      - take a div give class name hero
+      - insert a image in from background > image > make size > cover and position > center
+      - add overlay on image
+
+  - Seo ---------------------------------------------------------------------------------------
+      - go to page setting > give title tag name > give meta discription 
+         - description mustbe under 150 charectars
+         - open graph title> same as seo title tag >
+         - open graph description > same as seo meta description > 
+         - open graph image url > give here image link.
+ 
+  = In webflow database called cms ============================================================
+        - click on cms > create new collections > select any collection from top.
+        - Give collection name > give collection url name
+        - Add or remove nessery or unnessery collection field
+        - give data in collections field.
+        - if all done then click on > create collection.
+        - you can genearate fake content for use  
+
+  - For create new block post ----------------------------------------------------------------
+       - Click on > new block post > give basic info > Headline name > Add data in > post body
+       - Add data in > post Summary
+       - you can add video , photo in post body you also can modify text.
+       - If everything is ok click on > create
+
+  - Create dynamic post page -----------------------------------------------------------------
+       - when we create collection in cms database > one page is autometically create on Pages > cms pages.
+       - go to that page > and for show all block content ----------------
+            - For Hadline > Take a heading > select blue plus icon > add database heading.
+            - For photo > Take a image > select blue plus icon > add database image.
+            - For block all text > Take Rich text block > select blue plus icon > add dadbase post body.
+            - For see all block post page > there is a option in top bar.
+
+   - For connect multiple collecttion ----------------------------------------------------------
+            - Goto collection > add new field > select Reference type > give level name.
+            - select collection name > make this requiered
+
+   = Components : component previous name is symball -------------------------------------------
+            - work for reuse content. we can save any section in component for reuse.
+            - for save section in component > select full section > create component.
+            - when we change component section data it will be do change data from every where.
+      	    - for change data indivusual > we have to make that section > Unlink instance.
+ 
+  - Blog post create & category create -----------------------------------------------------------
+            - create a new collection > remove all without name & slug.
+            - Add new field > multi-reference.
+            - Give Level name > give Help text name > select collection > create collection.
+	    - new category >  Give name > Select post > create
+            - for single catagory post use reference, for multiple catagory use multi-reference.
+            - goto post field setting > add new field reference / multi reference.
+            - give level name > select category -- collection > save field > save collection. 
+            - you can remove post thumbnail field.  
+
+   - for Add dynamic random content in cms main page - like semilar / related product / post --------
+            - Set a title > more porduct / more posts / semillar post.
+            - add collection list - for any dynamic content 
+	    - Take a link block and select current categoty page for linking
+            - modify style what you want 
+            - filter have many condition you can use on your requirement.
+            - for filter > post / products and show some post / products.
+               goto setting > filter > post > blog post > is > current blog post > save
+            - for set post or product limit > display limits > limits items > show > 3
+            - for spasific category page go with link > add blogs > select title > name
+                 setting > filter > catagorie > equals > current category
+
+   - For webflow icon ----------------------------------------------------------------------------
+           - install meterial icons font 
+           - use google metarial icon font. copy icon name and use > reload page
+           - change front text into meterial.
+
+
+	
+
+   - E-commerce setup ----------------------------------------------------------------------------
+         - Ecommerce > Let,s turn your website into a store > lets do this
+         - for practice > you can use fake name generator.
+         - Setup guide > Add a business address > give > name, countey, address, city, state, zip, 
+              currency, language, > continue
+              - customize prize formeting > you can hide decimal number >
+              - you can change currency formet from price template > save
+
+         - Setup guide > review currency setting > check and save
+         - Setup guide > Add a shiping method > get data from client and learn more about it > save
+         - Setup guide > Add a product >       
+         - Setup guide > Add a product > Review tax setting > default tax category > select your product type.  
+         
+         - Ecommerce > products > setting > place all field information and create new field for your need > save
+         - for practice you can add 15 product using ai
+
+         - Ecommerce > categories > settting > you can add category base on your need > save
+         - for practice you can add 5 categories using ai
+         - you have to add products in category manually
+    
+   - for load product in page -------------------------------------------------------------
+         - take a section > take a container > take a collection list > select item.
+         - take a div in collection list > give div size 100% , height 300px 
+         - for set background image > div setting > get bg image > main image
+         - fot set image position goto div style > click background > position center
+         - for set compaire price > add 2 price text > give one price text normal > price
+              anather price give > compare at price. and give style.
+
+   - for design single product page -------------------------------------------------------          
+         - design page > ecommerce page > product template page
+         - you can add related product here using > collection list
+
+         -- add to cart 30
+
+
+
+   - Webflow Libraries -----------------------------------------------------------------------
+       - Libraries  is a packege of multiple sections.
+       - Some free librraies : 
+             Starter Library - default, 
+             Untitled UI Library,
+	     Relume - freemium. 
+
+   - Hosting --------------------------------------------------
+
+
+
+
+
+
+         
+
+
+
+
+
+
+
+
+
+
+

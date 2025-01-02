@@ -1,0 +1,21 @@
+NVM - Node Version Manager : It help us to use node all version.
+1. For Use Nvm : -------------------------------------------------------------------------------------
+       1. Download - nvm-setup.exe and install from this link.
+           == https://github.com/coreybutler/nvm-windows/releases
+
+       2. After install you have to add nvm path in enverment veriable.
+           == C:\Users\Tariful\AppData\Roaming\nvm 
+           == environment variables > System variables > Path > Edit > New > paste here pathe link > ok.
+
+       3. Basic command for nvm - node version manager : ================================
+	   == Check Node Vertion : --------------------------- node -v 
+ 
+           == Check NVM Vertion : ---------------------------- nvm --v  
+
+           == Check All Node Vertion what are available : ---  nvm list
+        
+	   == Install Node Anather Node Vertion :------------- nvm install versionNumber
+               = Example :------------------------------------ nvm install 20.12.2
+
+           == Swich One Node Vertion to anather Node Vertion : nvm use versionNumber
+                = Example :  --------------------------------- nvm use 20.12.2

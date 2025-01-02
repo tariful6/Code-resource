@@ -1,0 +1,169 @@
+SDLC - Software development life cycle ===============================================
+Project type MVP - Minimal viabal product --------------------------------------------
+    1. Planning
+    2. Analyze 
+    3. Design
+    4. Implementation
+    5. Testing & Integration
+    6. Maintainence   
+
+01 Functional Requirement : ==============================================================
+    1. Authentication :
+         = Students : 
+              - student can login and logout securely
+              - Students can update their password
+
+         = Faculty :
+              - Faculty can login and logout securely
+              - Faculty can update their password
+
+         = Admin : 
+              - Faculty can login and logout securely
+              - Faculty can update their password
+
+    2.Profile Management :
+          = Student 
+              - Students can manage and update their profile
+              - students can update certain firlds
+
+          = Facalty 
+              - Facalty can manage and update their profile
+              - Facalty can update certain firlds
+
+          = Admin 
+              - Admin can manage and update their profile
+              - Admin can update certain firlds
+
+    3. Academic Process 
+          = Student 
+              - Student can enroll in orrered cources for a spasific semister
+              - Student can view their class schedule
+              - Students can see their Grades
+              - Student can view notic board and event
+
+          = Facalty 
+              - Facalty can manage students grades
+              - Facalty can access Students Personal and accademic information.
+
+           = Admin 
+               - Admin can manage multiple process
+                    - Semister
+                    - Cource
+                    - Offered Cource
+                    - Section
+                    - Room
+                    - Building
+
+    4. User MAnagement
+           = Admin 
+                - Admin can manage multipe accounds
+                - Admin can block/unblock user
+                - Admin can change their password
+
+02 Data Model =========================================================================
+    = User : ---------
+         _id
+         id (generated)
+         password
+	 needsPasswordChange
+         isDelete
+	 createdAt
+         updatedAt
+    = Student : -----------------------
+         _id
+         id (generated)
+         name
+         gender
+         dateOfBirth
+         email
+         contractNo
+         emergencyContractNo
+         presentAdress
+         permanentAdress
+         guardian
+         localGuardian
+         profileImage
+         status
+         academicDepartment
+         isDelete
+	 createdAt
+         updatedAt
+
+    = Faculty: -----------------------
+         _id
+         id (generated)
+	 desicnation
+         name
+         gender
+         dateOfBirth
+         email
+         contractNo
+         emergencyContractNo
+         presentAdress
+         permanentAdress
+         profileImage
+         status
+         acadamicFaculty
+         academicDepartment
+         isDelete
+	 createdAt
+         updatedAt
+
+    = Admin: -----------------------
+         _id
+         id (generated)
+	 desicnation
+         name
+         gender
+         dateOfBirth
+         email
+         contractNo
+         emergencyContractNo
+         presentAdress
+         permanentAdress
+         profileImage
+         status
+	 manageDepartment
+         isDelete
+	 createdAt
+         updatedAt
+
+03 ER Diagram ===============================================================
+    - drow er diagram in - drow.io , luchitchat.
+04 API Endpoints ===========================================================
+    = User :
+        users/create-student(POST) 
+        users/create-faculty(POST) 
+        users/create-admin(POST) 
+
+    = Student :
+        students (GET)
+        students/:id (GET)
+        students/:id (PATCH)
+        students/:id (DELETE)
+        students/my-profile(GET)
+
+
+    = Faculty :
+        faculties (GET)
+        faculties/:id (GET)
+        faculties/:id (PATCH)
+        faculties/:id (DELETE)
+        faculties/my-profile(GET)
+    
+    = Admin :
+        admins (GET)
+        admins/:id (GET)
+        admins/:id (PATCH)
+        admins/:id (DELETE)
+        admins/my-profile(GET)
+    
+     = Auth :
+         auth/login
+         auth/refresh-token
+         auth/change-password
+         auth/forget-password
+         auth/reset-password
+
+
+

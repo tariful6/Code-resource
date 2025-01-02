@@ -1,0 +1,10 @@
+Bootstrap setup ------------------------------------------------------------------------
+   npm i bootstrap@5.3.3  // for install packege.
+   import '../node_modules/bootstrap/dist/css/bootstrap.min.css'  // add this in main.jsx
+
+Mui setup ------------------------------------------------------------------------
+   npm install @mui/material @emotion/react @emotion/styled // for install packege.
+   after install packege --  just add component.
+
+metarial icon setup -------------------------------------------------------------- 
+   npm i @mui/icons-material

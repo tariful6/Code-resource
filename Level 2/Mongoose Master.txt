@@ -1,0 +1,571 @@
+01.RDMS vs MongoDB -----------------
+   RDMS -- > MongoDB
+   Tables -- > Collection
+   Rows -- > Documents
+   coloumns --> Fields
+
+02.MongoDB Features -----------------------
+   - Json like document (BSON)
+   - indexing
+   - Aggregation Freamework
+   - security Features
+   - Free Atlas Database
+   - MongoDb compass (GUI)
+
+03. where mongoDb is a good choice -----------------------
+   - E-commerce application
+   - Social media application
+   - Gamming application
+   - Web application
+   - Mobile application
+   - Real time application
+
+04. MongoDb & Mongoose and setup process----------------------------------------
+    = download mongoDb from - MongoDB Community Edition.
+        - click complete and click next > next > finished. 
+        - clicked connect and clicked >_MONGOSH sheled. 
+        - show database -- show dbs
+        - create database -- use database name
+        - db.createCollection("test")
+        - db.getCollection("test").insertOne({name: "next level developer"})
+        - db.getCollection("test").find()
+	
+    = download mongoDb shell and install.
+        - open edit system enverment variable > enverment variable > User variables for Tariful > 
+          path > New > Paste here > C:\Program Files\MongoDB\Server\7.0\bin
+        - open cmd afer reset pc or reset cmd.
+        - mongod --version 
+        - mongosh
+        - show dbs
+        - use databasename(practice)
+        - db.getCollection("test").find()
+
+    = download nosqlbooster and setup. its free for 1 month ----------------------
+        - test connection > save & connect.
+        - ctrl + enter.
+        - db.test.insertOne({name : "kobita"})
+	- db.test.insertMany([{name : "kobita"}, {name : "farjana"}])
+	- db.test.findOne({gender : "Female"})
+	- db.test.find({gender : "Female"} , {name: 1, gender: 1, phone : 1})
+	- db.test.find({gender : "Male"}).project({name:1, gender:1, email:1})
+
+05. mongodb operator ---------------------------------------------
+      $eq = equal ------------------------------------------------
+            db.test.find({gender: {$eq : "Male"}})
+            db.test.find({age: {$eq : 12}})
+
+      $ne = not equal --------------------------------------------
+	    db.test.find({age: {$ne : 12}})
+
+      $gt = grather then ------------------------------------------
+	    db.test.find({age: {$gt : 30}})
+
+      $gte = grather then equal -----------------------------------
+	     db.test.find({age: {$gte : 30}})
+	     db.test.find({age: {$gte : 30}}).sort({age : 1})
+
+       $lt = lessthen then ----------------------------------------
+	     db.test.find({age: {$lt : 30}}).sort({age : 1})
+
+       $lte = lessthen then equal ---------------------------------
+	      db.test.find({age: {$lte : 30}}).sort({age : 1})
+
+ 
+       (,) = implicit and condition --------------------------------
+              db.test.find({gender : "Female",age : {$gte:18, $lte : 30}}, {age : 1, gender : 1 }).sort({age : 1})
+
+       $in = it work like filter. or, or operator if any value match it will show you.
+   	      db.test.find({gender : "Female",age : {$in: [18, 20,22,24,26]}}, {age : 1, gender : 1 }).sort({age : 1})
+       
+       Get value from array of object -----------------------------
+             db.test.find({"skills.name" : {$in : ["JAVASCRIPT" , "PYTHON"]}}).project({skills : 1}).sort({ age : 1 })
+
+
+       $nin = it show all values who not match your input value. 
+              db.test.find({gender : "Female",age : {$nin: [18, 20,22,24,26]}}, {age : 1, gender : 1 }).sort({age : 1})
+
+       $in , $nin example ---------------------------------------
+	     db.test.find({gender : "Female",age : {$nin: [18, 20,22,24,26]}, interests : {$in : ["Cooking", "Gaming"]}}, {age : 1, gender : 1, interests : 1 }).sort({age : 1})
+
+       $and = explicit and ----------------------------------
+            db.test.find({$and : [
+               {gender : "Female"}, 
+               {age : {$ne : 15}},
+               {age : {$lte : 30}}
+            ]}).project({age : 1, gender : 1}).sort({ age : 1 })
+
+       $or = explicit or ----------------------------------
+	    db.test.find({$or : [
+              {interests : "Traveling"}, // get value from array.
+              {interests : "Cooking"}
+            ]}).project({age : 1, gender : 1, interests : 1}).sort({ age : 1 })
+
+
+            db.test.find({$or : [
+              {"skills.name" : "JAVASCRIPT"},   // get value from object.
+              {"skills.name" : "PYTHON"},
+            ]}).project({skills : 1}).sort({ age : 1 })
+
+       $exists = operator : it give you field but not give you field value --------------------------
+              db.test.find({age : {$exists: true}})  // show all field where age field exits.
+              db.test.find({age : {$exists: false}}) // show all field where age field not exits.
+
+       $type = operator : it give you data base on value type
+            db.test.find({age : {$type: "number"}})
+            db.test.find({age : {$type: "string"}})
+            db.test.find({friends : {$type: "array"}})
+            db.test.find({company : {$type : "null"}}).project({company: 1})
+
+       $size = operator : work for array. we can find array giving length ------------------------
+            db.test.find({friends : {$size : 4}}).project({friends: 1})
+            db.test.find({friends : {$size : 5}}).project({friends: 1})
+
+       $all = : work for find array values. it shows that array who have these input values -------
+            db.test.find({interests : {$all: ["Travelling", "Gaming", "Reading"]}}).project({interests: 1})
+
+       $elemMatch = : work for find object values. it shows that object who have these input values. --- 
+            db.test.find({
+               skills : {$elemMatch: {
+                  name : "JAVASCRIPT",
+                  level : "Intermidiate"
+               }}
+            }).project({skills:1})
+
+update operator ----------------------------------------------------------
+     $set : for primitive type ------ 
+         db.test.updateOne(
+            {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+            {$set : {age : 85}} )
+
+     $set : for none primitive type array : it replease full array.
+         db.test.updateOne(
+             {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+             {$set : { interests : ["Gaming" , "Reading", "Writting"]}} 
+         )
+
+     $set : for modify object single value -------  
+          db.test.updateOne(
+             {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+             {$set : {"address.city" : "Dhaka"}}
+          )
+
+
+     $set : for modify object multiple value -------  
+         db.test.updateOne(
+            {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+            {$set :
+               {"address.city" : "Kurigram", "address.country" : "bangladesh"},
+             }
+         )
+
+
+     $addToSet : add new value in array keeping previous value.. it never add same value again
+         db.test.updateOne(
+            {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+            {$addToSet : { interests : "Movies"}} 
+         )
+
+     $each -- add multiple value in array kepping previous value but never add dublicate value.
+        db.test.updateOne(
+           {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+           {$addToSet : { interests : {$each: ["Byking", "Eating"]}}} 
+        )
+
+
+     $push -- add dublicate value ------------
+         db.test.updateOne(
+         {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+         {$push: { interests : {$each: ["Byking", "Eating"]}}} 
+      )
+
+
+delete operator ----------------------------------------------------------
+    $unset : remove property and value -----------------------------------
+        db.test.updateOne(
+          {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+          {$unset: {birthday: ""}} 
+        )
+
+       db.test.updateOne(
+         {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+         {$unset: {age: 1}} 
+       )
+
+
+    $pop : remove last and first element from array -----------------------
+        db.test.updateOne(
+           {_id : ObjectId("6406ad63fc13ae5a40000065")},  
+           {$pop: {friends: 1}} // remove last element..
+ 	)
+
+        db.test.updateOne(
+           {_id : ObjectId("6406ad63fc13ae5a40000065")},  
+           {$pop: {friends: -1}} // remove first element..
+        )
+
+    $pull : delete single value from array --------------------------
+        db.test.updateOne(
+          {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+          {$pull: {languages: "German"}} 
+        )
+
+    $pullAll:  delete multiple value from array  --------------------------
+        db.test.updateOne(
+           {_id : ObjectId("6406ad63fc13ae5a40000065")}, 
+           {$pullAll: {languages: [ "Catalan", "Thai" ]}} 
+         )
+
+    delete single object data : delete document -----------------------------------------------
+        db.test.deleteOne({_id: ObjectId("6406ad63fc13ae5a40000065")})
+
+    create collection ----------------------
+         db.createCollection("post")  -- > refresh
+
+    delete collection ----------------------
+         db.post.drop({ writeConcern: {w: 1}})  -- > refresh
+ 
+
+ Aggregation framework - operator ===================================================================
+    Aggrigaton is a way of processing a large number of documents in a collection by means of passing 
+    them though different stages.... these stages called pipeline. this pipeline can do filter, sort,
+    group, reshape, modify document.
+    Working process : Data Flow --> Collection > Stage1 > Stage2 > Stage3 > Final Output.
+
+   $match & $project -----------------------------------------------------------
+     db.test.aggregate([
+        {$match: {gender : "Male",age : {$lt : 30}}},  // stage: 1 - work for filter ---
+        {$project: {name:1, age : 1, gender: 1 }} // stage: 2 ---
+     ])
+
+   $match, $addField $out -------------------------------------------------------
+     db.test.aggregate([
+        {$match: {gender : "Male"}}, // stage 1 --------------
+        {$addFields: {cource : "Level two", eduTech : "Ph hero"}}, // stage 2 - : it never add value in original document.
+        {$project: {cource : 1, eduTech : 1}}, // stage 3 -- it filter value what you want to show.
+        {$out: "cource-students"} // stage 4 - it create new collection for add value. 
+    ])
+
+   $match, $addField $out, & $merge --------------------------------------------
+      db.test.aggregate([
+        {$match: {gender : "Male"}}, // stage 1 --------------
+        {$addFields: {cource : "Level two", eduTech : "Ph hero"}},  // stage 2 -- : it never add value in original document.
+        {$project: {cource : 1, eduTech : 1}},   // stage 3 -- it filter value what you want to show.
+        {$merge: "test"} // geve here collection name.   // stage 4 -- it  add values in existing collection. 
+     ])
+
+
+   $group : make document group & sum : it shows how much similar data exits in collection ------------
+       db.test.aggregate([
+          {$group : { _id : "$address.country", count : {$sum : 1}}}
+       ])
+
+   $group, sum,  push : it show document or document entry -----------------------------------------------
+      db.test.aggregate([
+         {$group : { _id : "$address.country", count : {$sum: 1} ,giveName: {$push: "$name"}}} // show only name.
+      ]) 
+
+   $group, sum ,  push , $$ROOT : it show full document------------------------------------------
+       db.test.aggregate([
+          {$group : { _id : "$address.country", count : {$sum: 1} ,fullDoc: {$push: "$$ROOT"}}} // show full doc..
+       ]) 
+
+       db.test.aggregate([
+          {$group : { _id : "$address.country", count : {$sum: 1} ,fullDoc: {$push: "$$ROOT"}}},
+          {$project: {"fullDoc.name" : 1, "fullDoc.email" : 1 , "fullDoc.phone" : 1 }}
+       ]) 
+
+   $group : Sum, Min, Max, Avg, subStract--------------------------------------------------------
+       db.test.aggregate([
+          {$group : {
+             _id : null,
+             totalSalary : {$sum : "$salary" },
+             maxSalary : {$max : "$salary"},
+             minSalary : {$min: "$salary"},
+             avgSalary : {$avg: "$salary"}
+          }},
+          {$project: {
+             totalSalary : 1, 
+             maxSalary :1, 
+             minSalary : 1,
+             AgerageSalary : "$avgSalary",
+             rangeBetweenMaxandMin : {$subtract: ["$maxSalary","$minSalary"]} 
+           }}
+        ])
+
+    $group, $unwind : it broke array & convert array value into a obj.------------------------------------
+       db.test.aggregate([
+          {$unwind: "$friends"}, 
+          {$group: { _id: "$friends", count : {$sum:  1}}}
+       ])
+
+
+       db.test.aggregate([
+          {$unwind: "$interests"}, // it broke array & convert array value into a obj.
+          {$group: { _id: "$age", interestPErAge : {$push: "$interests"}}}
+       ])
+
+
+   $bucket : it set a boundarie for document ------
+      db.test.aggregate([
+         {
+           $bucket: {
+              groupBy: "$age",
+              boundaries: [ 20, 40, 60, 80], //  stage -- 1.
+              default: "80 plus old man",
+              output: {
+                count: { $sum: 1 },
+                checkAllName : {$push: "$$ROOT"}
+              }
+            }
+         },
+         {$sort : {count : -1}}, //  stage -- 2 : sort document 
+         {$limit: 2 }, //  stage -- 3  : set document limit. how much document you want to show. 
+         {$project :  {count : 1} } //  stage -- 4 ---- 
+      ])
+
+    $facet : it can create three pipeline in single collection ------------------------
+        db.test.aggregate([
+           {
+            $facet: {
+              "friendsCount" : [ //  pipeline 1 ----------
+                  {$unwind: "$friends"},  // stage 1 -- 
+                  {$group : {_id : "friends", count : {$sum: 1}}}  // stage 2 -- 
+               ],
+               "educationCount" : [  //  pipeline 2 ----------
+                  {$unwind: "$education"},
+                  {$group: { _id: "$education", count : {$sum: 1}}}
+               ],
+               "skillsCound" : [ //  pipeline 2 ----------
+                  {$unwind: "$skills"},
+                  {$group: { _id: "$skills", count : {$sum: 1}}}
+               ] 
+             }
+          }
+       ])
+
+
+    $lookup stage, embedding vs referencing -------------------------------------
+     embedding use for : ------------------
+       - one to one relationship
+       - Frequent Reading data
+       - Automic updates
+       - Reduced NEtwork Overhead
+       - Small Data Size
+
+     referencing use for : ---------------
+      - one to many relationships
+      - Many to many
+      - Frequently writing
+      - Big data size
+      - Scalability
+      - Flexibility
+
+
+    $lookup --------------------------------------------------------
+       db.orders.aggregate([
+          {
+            $lookup : { // work for join two data > from two collections.
+               from : "test", // you want go get data from which collection.
+               localField : "userId", // local or curent collection unique id.
+               foreignField : "_id", // anather collection unique id.
+               as : "user" // which name you want to show.
+          }  
+        }
+     ])
+
+   Indexing : it work to decrease time for data searching. it make spicial database for indexing value
+      for find document faster. it set id as a default index. 
+      db.getCollection("massive-data").createIndex({email : 1}) // save email in index.
+      db.getCollection("massive-data").dropIndex({email : 1}) // delete email from index.
+
+   compound index : when we index in multiple field its called compound index.   
+      search  index : it search word in collection field . 
+
+
+mongoose ===============================================================================
+    mongoose is a one kind of defance. who accpet or pass speasific type of data.
+    if data type is valid then mongoose send data in mongoDb. otherwise it not send.
+
+Why Mongoose --------------------------------------------------------------------------
+   - Schema Definition
+   - Model Creation
+   - Data Validation
+   - Querying
+   - Middleware Support
+   - Population
+
+Installing express , mongoose, typescript, dotenv ,cors ------------------------
+   npm init -y
+   npm install express
+   npm install mongoose --save
+   npm install typescript --save-dev
+   npm install cors
+   npm i dotenv
+   npm i -D @types/express
+   tsc --init // for typesceipt config file.
+
+- Make a folder called - src for source file.
+- do config tsconfig.json file ------
+     "rootDir": "./src",
+     "outDir": "./dist",
+
+- Make two files called app.ts & server.ts in src folder.
+- paste those express code in app.ts ---------------------------------------
+      const express = require('express')
+      const app = express()
+      const port = 3000
+
+      app.get('/', (req, res) => {
+          res.send('Hello World!')
+      })
+
+- paste those express code in server.ts ---------------------------------------
+      const mongoose = require('mongoose');
+      async function main() {
+           await mongoose.connect('mongodb://127.0.0.1:27017/test');
+      }
+      app.listen(port, () => {
+          console.log(`Example app listening on port ${port}`)
+      }) 
+
+
+- do config packege.json file adding this - 
+     "build": "tsc",
+- run this command for create js file 
+      npm run build
+- For check server is running or not 
+       node dist/app.js
+
+- make .env file in root and add those and make database---------------------------------
+      PORT= give port number.
+      PORT=5000
+
+      DATABASE_URL= give mongodb atlas url
+      DATABASE_URL=mongodb+srv://newAdmin:1BtqGBywmNseTX0B@cluster0.yy3zscc.mongodb.net/first-project?retryWrites=true&w=majority&appName=Cluster0
+      here --- first-project is database name.
+
+- Make a index.ts file > in app folder > in src folder --------------------------------
+     import dotenv from 'dotenv'
+     import path from 'path'
+     dotenv.config({ path: path.join((process.cwd(), '.env')) })
+
+     export default {
+       port: process.env.PORT,
+       database_url: process.env.DATABASE_URL
+    }
+
+- 1. Modify server.ts code using config -----------------------------------------
+import config from "./app/config";
+const mongoose = require('mongoose');
+
+main().catch(err => console.log(err));
+
+async function main() {
+    await mongoose.connect(config.database_url);
+}
+
+app.listen(config.port, () => {
+    console.log(`Example app listening on port ${config.port}`);
+})
+
+
+
+- 1. Modify app.ts code using config -----------------------------------------
+npm i --save-dev @types/express
+
+import express, { Application, Request, Response } from 'express'
+const app: Application = express()
+const port = 3000
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello World!')
+})
+
+export default app;
+
+
+- 2. Modify server.ts code using config -----------------------------------------
+import mongoose from 'mongoose'
+import config from "./app/config";
+import app from './app';
+
+main().catch(err => console.log(err));
+
+async function main() {
+    try {
+        await mongoose.connect(config.database_url as string);
+        app.listen(config.port, () => {
+            console.log(`Example app listening on port ${config.port}`);
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+- 2. Modify app.ts code using config -----------------------------------------
+npm i --save-dev @types/cors
+
+import express, { Application, Request, Response } from 'express'
+import cors from 'cors'
+const app: Application = express()
+const port = 3000
+
+// parsers  
+app.use(express.json())
+app.use(cors())
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello World!')
+})
+
+export default app;
+
+
+
+Installing eslint  refactor code --------------------------------------
+  - add those in tsconfig file in top side ------------------------
+       "include": ["src"], // which files to compile
+       "exclude": ["node_modules"], // which files to skip
+
+
+  - add those command for islint adding -------------------------------
+       npm install eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --save-dev
+       npx eslint --init
+         y > JavaScript modules (import/export) > None of these > yes > Node > yes > npm
+
+  - Add Rules in islint.config.mjs file --------------------
+       {rules : {
+          "@typescript-eslint/no-unused-vars": "error",
+       }},
+
+  - Create .eslintignore file ------------------------------
+       add --- node_modules and dist in .eslintignore 
+
+  - Add this in packege.json on script -----------------------
+     "lint": "eslint src --ignore-path .eslintignore --ext .ts",
+
+"@typescript-eslint/no-unused-vars": "error",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+node dist/app.js
+
+
+
+
+
+
+

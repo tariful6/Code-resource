@@ -1,0 +1,113 @@
+Server Site : Api for pagination Spasific page data---------------------------
+     app.get("/products", async (req, res) => {
+        const page = parseInt(req.query.page);
+        const size = parseInt(req.query.size);
+        console.log("pagination query", page, size);
+        const result = await productCollection
+          .find()
+          .skip(page * size)
+          .limit(size)
+          .toArray();
+        res.send(result);
+      });
+
+Server Site : Api for pagination button ----------------------------------------
+     app.get("/productCount", async (req, res) => {
+         const count = await productCollection.estimatedDocumentCount();
+         res.send({ count });
+      });
+
+load pagination page cound using loder-----------------------------
+      {
+        path: '/',
+        element: <Shop></Shop>,
+        loader : () => fetch('http://localhost:5000/productCount')
+      },
+    
+
+pagination and load data contain in component----------------------------------------
+     const [products, setProducts] = useState([]);
+     const {count} = useLoaderData();
+     const [currentPage, setCurrentPage] = useState(0);
+     const [itemsPerPage, setItemsPerPage] = useState(10);
+     const numberOfPages = Math.ceil(count / itemsPerPage);
+
+     // const pages =  [];
+     // for(let i = 0; i < numberOfPages; i++) {
+     //     pages.push(i);
+     // }
+     // console.log(pages);
+
+     const pages = [...Array(numberOfPages).keys()];
+     console.log(pages);
+
+     useEffect(() => {
+        fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`)
+            .then(res => res.json())
+            .then(data => setProducts(data))
+     }, [currentPage, itemsPerPage]);
+
+
+     const handleItemsPerPage = (e) => {
+        const val = parseInt(e.target.value)
+        console.log(val)
+        setItemsPerPage(val)
+        setCurrentPage(0)
+     }
+
+     const handlePreviousPage = () => {
+        if(currentPage > 0) setCurrentPage(currentPage - 1)
+     }
+
+     const handleNextPage = () => {
+        if(currentPage < pages.length -1) setCurrentPage(currentPage + 1)
+     }
+
+
+
+     <div className="products-container">
+          {
+              products.map(product => <Product
+                  key={product._id}
+                  product={product}
+                  handleAddToCart={handleAddToCart}
+              ></Product>)
+          }
+      </div>
+
+
+      <div className='pagination'>
+          <p>Current page : {currentPage}</p>
+          <button onClick={handlePreviousPage}>Prev</button>
+              {
+                  pages.map(page => <button
+                     className={currentPage === page ? 'selected' : undefined} 
+                     key={page} 
+                     onClick={()=> setCurrentPage(page)}>{page}</button>)
+              }
+           <button onClick={handleNextPage}>Next</button>
+           <select value={itemsPerPage} onChange={handleItemsPerPage}>
+             <option value="5">5</option>
+                 <option value="10">10</option>
+                 <option value="20">20</option>
+                 <option value="30">30</option>
+           </select>
+      </div>
+
+
+Css for paginaation button -----------------------------------------
+    .pagination{
+        text-align: center ;
+        margin-bottom: 15px;
+    }
+
+   .pagination button{
+       margin-right: 10px;
+    }
+
+   .pagination .selected{
+      background-color: orange;
+    }
+
+
+

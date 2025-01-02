@@ -1,0 +1,58 @@
+1. deploy dist file in netlify.
+2. add website link in authentication > setting > Authorized domains > add domain. // if you use firebase then.
+3. Check vercel cli already install or not --- 
+      vercel --version // check it in server bash.
+
+4.If vercelcli not found for install in server bash use it.
+      npm i -g vercel
+
+5.make a file -- vercel.json -- and push those code here.
+    {
+      "version": 2,
+      "builds": [
+          {
+             "src": "./index.js",
+             "use" : "@vercel/node"
+          }
+      ],
+      "routes": [
+         {
+            "src": "/(.*)",
+            "dest" : "/",
+            "methods": ["GET","POST","PUT","PATCH","DELETE","OPTIONS"] ,
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
+         }
+      ]
+    }
+
+6. do config server index.js cors using those code --------------------
+	const corsOptions = {
+  		origin: "*",
+  		optionsSuccessStatus: 200,
+	};
+
+	app.use(cors(corsOptions)); // replace cors with middleware cors.
+	app.use(express.json()); 
+
+
+7. commit  or remove this from serversite --  await client.connect();
+
+8. go to server bash insert - versel - for login vercel > give email name > do complete varification.
+	-- for login -- versel login
+	-- for logout -- versel logout
+9. for initilize vercel use in bash -- vercel > y > enter > N > enter > enter.
+
+10. goto vercel and open your backend project > Settings > Environment Variables > add env file.
+	- Key: DB_USER   Value: fireMongo ---> save
+	- Key: DB_PASS   Value: Tzoitl3wA289A2Eo ---> save
+
+11. change or replace client side all local links with versel server earth icon first link.
+	- replace manually
+	- for check all replace link - ctrl + shift + f : find -- http://localhost:5000  
+	- if any local server link found change it.
+
+12. deply again dist file in netlify to client side.
+
+

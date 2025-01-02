@@ -1,0 +1,89 @@
+Tailwind CLI VS Tailwind PostCss Explain :
+   Tailwind CLI : it is a normal html css like project. you cannot build it.
+      you can open directly html file in browser.
+
+   Tailwind PostCss : It is a react.js like project. you have to build it.
+	 you cannot open directly html file in browser.
+	
+
+
+Tailwind Postcss project setup =================================================================
+
+1. initialize tailwind projects -----
+	npm init > inter > inter > inter
+
+2. install tailwind packege for projects -----
+	npm install -D tailwindcss postcss autoprefixer
+	npx tailwindcss init
+
+4. create a file give name - postcss.config.js - and add those code here. make it in foot.
+       module.exports = {
+          plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+         }
+       }
+
+6. create index.html file and coddect with css file 
+      <link rel="stylesheet" href="index.css">
+
+7. create index.css file and add all of those code in index.css file . make it in foot.
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+9. install vite package for hot reload ---------------
+    npm i vite  
+
+10. add those code  in script package.json. you can keep test.
+      "start": "vite"  // npm start.
+      "build": "vite build" // npm run build.
+ 
+11. Add this tailwind.config.js file content.
+      content: ["./*.{html,js}"],  
+
+12. make a file -- .gitignore // make this outside. 
+
+13. insert -- node_modules in  .gitignore file.
+
+
+Tailwind Cli project setup =================================================================
+1. initialize tailwind projects -----
+	npm init > inter > inter > inter
+
+2. install tailwind packege for projects -----
+	npm install -D tailwindcss
+	npx tailwindcss init
+
+3. add this in tailwind.config.js
+	content: ["./dist/*.{html,js}"],
+
+4. make a dist folder & make index.html file in dist folder.
+
+5. connect css file to html file. add this in header.
+	<link rel="stylesheet" href="style.css"> 
+
+6. make a src folder & make input.css file in src folder. add those code in input file.
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+7. Add this in package.json file in script ----
+    "dev" : "tailwindcss -i ./src/input.css -o ./dist/style.css --watch"
+
+8. for run this code ---
+ 	npm run dev
+
+9. for open project in browser - open index.html file with live server.
+
+10. for deploy side -- just copy dist folder or html or css file.
+
+
+
+
+
+
+
+
+
+ 

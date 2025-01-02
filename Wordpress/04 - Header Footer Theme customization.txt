@@ -1,0 +1,54 @@
+0. Make some pages For Ecommerce website ------------------------------
+    Ex :  About Us,  Blog, Cancellation & Refund,  Contract Us, FAQs, Home, 
+          Payment Method,  Select Refund and Returns Policy,
+          Return & Exchange,  Store Location,  Terms & Conditions, 
+
+1. Theme Customization ------------------------------------------
+	- Two type of theme are available in wordpress : block theme 
+ 	   and classic theme. we use classic theme mostly.
+
+2. Set Logo and fav icon ----------------------------------------
+	- Install a theme and go to Appearence > customization > Header.
+	- Header : Use for header logo.
+	- Side Identity : use for fav icon.
+
+3. Create Menu for Header Footer and More --------------------------
+	- Go to Appearence > Menus.
+	- Click on screen options checked > Product categories. if it not checked.
+	- Give menu name - for create menu.
+	- open product categories > View all > select all > and to menu > arrange menu, sub m.
+	- Arange All categories base on main categories & sub categories > checked Primary / Secondary > save menu.
+	
+	- Display location : select menu location - Primary, Secondary, Mobile, Footer.
+	- You can make indivusal menu for mobile tablet and desktop.
+	- make sure you save menu.
+
+4. Edit page default setting -----------------------------------
+	- Page Title : disable / hide.
+	- Page Layout : Fullwidth.
+	- Content Style : unboxed.
+	- Content Vertical Padding : disable.
+	- Show Featured Image : disable.
+
+5. Set Color and Fonts -----------------------------------------
+	- Go to Appearence > Customize > Color & Front.
+	- Typography : Base Font > Default font > choose front.
+	- Heading Font Family : > inherit > choose front.
+	- Google Font Subsets : > choose a font language for ignore all language.
+	- Colors : set all color.
+	- Buttons  : set Buttons.
+
+
+6. set icon in menu using Menu Icons by ThemeIsle plugin -------------
+      - install & do active Menu Icons by ThemeIsle plugin.
+      - crate a menu give any name -- Ex : Payment Icons
+      - open menu icon setting > global > checked front awesome.
+      - go to custom Links give url & link text > and add to menu.
+      - open menu custom link > from slect > set menu icon.
+      - for hide menu title >  menu icon setting > Hide Label > yes > save.
+      - save menu in footer.
+
+7. For set Widgets  : ----------------------------
+   - go to Widgets > open footer > add Navigation menu > Select Menu > Select your Menu.
+
+8. Go to > Theme Woocomerce customize and customize what you want...

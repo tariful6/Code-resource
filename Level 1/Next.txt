@@ -1,0 +1,251 @@
+Next-JS Means - React with supper Power.
+Next-JS work for :
+	1. optimize image, front, and script.
+	2. Pre-rendering(SSR, SSG) - server site rendering. Static Site Generation.
+	3. Data Facing 
+	4. Routing - building routing system.
+	5. API Routes
+
+Why Next JS :
+	React JS - It is a Library. it is a small things. it can support multiple package.
+	React is not SEO friendly.
+	Next JS - It is a Framework. it is a biggest things. many Library can exists in Framework.
+	we can make full stack application using next js or framework. Next build in SEO friendly.
+  
+Pre-Rendering And Client Side Rendering : 
+	CSR - Client site rendering.
+	SSR - Server site rendering.
+	SSG - Static Site Generation.
+
+For solve next js project initialize error : if first comment not work the use second.
+	npm cache clear --force 
+	npm install --legacy-peer-deps
+
+Create next js project : ===========================================================================
+	npx create-next-app@latest
+	y > give project name > No > Yes > Yes > Yes > Yes > No
+
+Run Next js project : use -  npm run dev
+
+Change next js project port : 
+	go to package.json > add -p 3001 in dev value. Ex - "dev": "next dev -p 3001",
+
+Create and use next js component : ---
+	1. must use small letter to create component and component folder.
+	   you can give any folder name. but you have to give every component name page.js.
+	2. make every component in src > app file .
+	3. route work to take page folder name. is is a folder base route system. Ex - http://localhost:3001/about 
+	   here we can see component name is not important.
+
+Create dynamic route : -----------
+	1. Create a folder and file in that folder which folder you want to make dynamic.
+	   folder name must be give - [id] make a file in this folder give file name page.js
+
+	2. for show dynamic route - add a children in page component as a props.
+	    Ex - const DynamicPage = ({params}) => {} // <h1>{params.id}</h1>
+
+for get query perameter or serch params : -----------
+	http://localhost:3001/products/1?category=Laptop&price=100 // past in search bar in browser.
+	Ex - const DynamicPage = ({params, searchParams}) => {} // <h1>{searchParams.category}</h1>
+
+for create nested route : -----------
+	make a nasted folder in app folder : news > page.js > blog > page.js
+	for see nasted route : http://localhost:3001/news/blog
+
+Server Component or Next js dropat or convert server to client-------
+	1. we cant use here react hooks - usestate(), useeffect(),
+	2. we cant use here event listener - onClick(), onChange()
+	3. we cant use here browser api - localStorage, sesoanStroge.
+	4. we cant use here react custom hooks.
+	5. we cant use here react class component.
+
+     NB : If we use these must we have to add in top - "use client" .but it is a bad practice.
+
+Proper way to convert server site to client site : 
+	1. make a component like react in src > components. but extension must be use js not jsx.
+	2. only difference is you have to use - "use client" - in top of react component.
+	3. After make any component you can import those component like react.
+
+Create Error page or route not found page ----------------------------------
+	make a file in app folder. give file name not-found.js
+
+For data loading create as loading component -------------------------------
+	make a file in app folder. give file name loading.js
+
+For handle client side error -----------------------------------------------
+	1. make a file in app folder. give file name error.js
+	2. must add in top -- "use client" in error page.
+	3. for test throw a error from homePage - throw new Error()
+
+For show or control header footer base on spasific page --------------------
+	1. create a folder in app folder. folder name must be give -- (withLayout)
+	2. create those pages here where you want to show header footer.
+	3. create a file in (withLayout) folder. file name must be give -- layout.js
+	4. Received a props as a {children} and use it in div. here you can add -  header footer. 
+                <div>
+           	    <h1>Header</h1>
+        Example: --    {children}
+	   	    <h1>Footer</h1>
+        	</div>
+
+Navigation With Link --------------------------------------------
+        <Link href="/about">
+            <button className="btn  btn-primary">About</button>
+        </Link>
+
+Use MetaData For Better SEO : add this in top in page. 
+    export const metadata = {
+        title: "About Page",
+        description : "This is about page"
+    };
+
+Image Optimization Using Image Component, Import Alias :
+      1. load image from link : -------------------------
+	  1. import Image from 'next/image';
+	  2. <Image src='https://i.ibb.co/6t7STMm/27.jpg' alt='coffee cup' width={500} height={400}></Image>
+	  3. add this in next.config.mjs > nextConfig {  }
+	        images: {
+                    domains: ['i.ibb.co'],  // give image website domain name.
+                 } 
+
+      2. load image from local folder : -------------------------
+	    1. create a folder in src folder. folder name must be give -- assets & store all image here.
+	    2. add those in top that page where you want to use iamge. 
+		import Image from 'next/image';
+		import nextImage from "@/assets/17.jpg"
+	    3. <Image src={nextImage}alt='coffee cup' width={500} height={400}></Image>
+	
+For create fake server -----------------------------
+	1. npm install json-server@0.17.4
+	2. create a file in root db.json insert here fake data.
+	    {
+		"fakeDataName" : [ add fake data here]
+	    }
+
+	3. create a file in root server.js insert - those code here.
+	    const jsonServer = require("json-server");
+	    const server = jsonServer.create();
+	    const router = jsonServer.router("db.json");
+	    const middlewares = jsonServer.defaults();
+
+	    server.use(middlewares);
+	    server.use((req, res, next) => {
+  	    console.log("Request received");
+  	    res.header("Access-Control-Allow-Origin", "*");
+  	    res.header(
+    		"Access-Control-Allow-Methods",
+    		"GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  	    );
+  	    res.header(
+   	 	 "Access-Control-Allow-Headers",
+    		"Origin, X-Requested-With, Content-Type, Accept"
+  	    );
+  	    next();
+	    });
+
+	   server.use(router);
+	   server.listen(5000, () => {
+  		console.log("JSON Server is running");
+	    })
+
+For get data from server ---------------------------
+	1. Add async function in page component.
+	2. add this code after add async function 
+
+	      const res = await fetch("http://localhost:5000/posts",{
+                cache: "force-cache",
+             });
+
+	      const res = await fetch("http://localhost:5000/posts",{
+  	      next: {
+                revalidate: 5 // it automatically build after 5 seconds in if we change backend data.
+                }
+             });
+
+	      const res = await fetch("http://localhost:5000/posts",{
+		cache: "no-store",
+             });
+
+	   const posts = await res.json();
+	   console.log(posts);
+
+some command for maintain server :
+	 npm run dev
+	 node server
+	 npm run build
+	 npm start
+
+for dynamic route -----------------------------------------------------
+	= Add those in Parent component : ----------------------------- 
+          <Link href={`/posts/${post.id}`}>
+               <button className="btn btn-primary">see more</button>
+          </Link>
+
+	= Add those in Child component : ----------------------------- 
+	  1. Add async function in page component.
+	  2. for show dynamic route - add a {props} in page component as a props.
+		Example : DetailsPage = async({params}) => {}
+	  3. add this code after add async function 
+	      const res = await fetch(`http://localhost:5000/posts/${params.id}`)
+              const post = await res.json();
+
+
+Dynamic Data Fetching With GenerateStaticParams() (SSG) ------------------------
+why we use it : for pre render some content for site fast loading.
+
+	export async function generateStaticParams(){
+    	const res = await fetch("http://localhost:5000/posts")
+    	const posts = await res.json();
+   	const ids = posts.map((post) => { // if i want to specific some data. we can do slice here.
+        	return {
+           	    id: post.id + "",
+        	};
+    	    })
+        // console.log(ids);
+    	return ids;
+	}
+
+Use case of UseState & useEffect -----------------------------------------
+	1. create a components folder in src folder.
+	2. make a file and folder in components you can give same name for file and folder.
+	3. add those code in that file what you make some time before in components folder.
+	     "use client" // add this in top component file.
+	      import { useEffect, useState } from "react";
+
+	      const [users, setUsers] = useState([]); // add those after component start.
+              useEffect(() => {
+                 fetch("https://jsonplaceholder.typicode.com/users")
+                 .then(res => res.json())
+                 .then(data => setUsers(data));
+              }, []);
+
+	   <h1>Total user : {users.length}</h1> // add this after return.
+	4. make a folder and page.js file in app folder and import useeffect use file.
+	        example : <div>
+                    	       <Users></Users>
+                          </div>
+
+
+Use CSS Module or custom css --------------------------------------------
+	1. make a file in component folder. must give file name -- Posts.module.css
+	2. add css class in  Posts.module.css file
+	3. import css file : -- import styles from './Posts.module.css'
+	4. for use custom css class : --  <h1 className={styles.header_text}></h1>
+ 
+
+
+news portal , social midea -- ssr -  server site rendering. 
+ecommerce -- isr  - revailidate.
+
+video 8 is running 
+
+
+   
+	
+
+
+
+
+
+	    
+

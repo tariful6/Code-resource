@@ -1,0 +1,377 @@
+
+Firebase Again : ============================================================
+1. setup react-router : make a folder Router and make a file Router.jsx in Router
+   folder. and do configer router configer. 
+
+2. satup firebase > firebase.init.js or  firebase.config.js  file with export auth.
+   (i)  npm install firebase
+   (ii) make firebase.config.js file in firebase folder. and push those code here.
+	
+        import { getAuth } from "firebase/auth";
+        import { initializeApp } from "firebase/app";
+
+         const firebaseConfig = {
+            apiKey: "AIzaSyAaTDRgSsZDWYVW9YKOQdCR7IzKx1C3SSA",
+            authDomain: "authentication-7ff0a.firebaseapp.com",
+            projectId: "authentication-7ff0a",
+            storageBucket: "authentication-7ff0a.appspot.com",
+            messagingSenderId: "659654678495",
+            appId: "1:659654678495:web:10a8a2a20fa60204e2d66a"
+          };
+
+         // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+            export default auth;
+ 
+3. Setup firebase authentication : ------
+   (i)  enable sign in method from build > authentication > signIn method = google,
+        github,facebook, twitter, email/password, etc.
+   
+   (ii) make a providers folder > in src. make AuthProvider.jsx file in providers.
+   
+   (iii) Push those code in AuthProvider.jsx. and chill.
+    	
+         (a) for import file. add those codes who is necessery or if auto import not work ------------------
+              import {GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+      
+              import { createContext, useEffect, useState } from "react";  // for Context api, useState, useEffect. // must use.
+              import PropTypes from 'prop-types';  // for propstype error handle .
+              import auth from './../firebase/firebase.init';  // we import auth from firebase.init.js. // must use.
+              
+              const googleProvider = new GoogleAuthProvider()  // for google provider. use it if you want to login eith google.
+
+              export const AuthContext = createContext(null);  // cretate context  api for easily get data from any where. // must use.
+
+         (b) what code we use in AuthProvider component---------------
+
+              const AuthProvider = ({children}) => { // we recived props as a children from main.jsx.
+
+              const [user, setUser] = useState(null); // for observer .
+              const [loading, setLoading] = useState(true); // for solve reload problem > it autometiclly navigate in Home page when we reload page.
+
+            (1)  create user using email password  -----------------------------------------------
+                      const createUser = (email, password)=>{  // for create user.
+                            setLoading(true) // for solve navigate problem.
+                             return createUserWithEmailAndPassword(auth, email, password)
+                       } 
+	       const handleUpdateProfile = (name, photo) => {   // for update user.
+                             return updateProfile(auth.currentUser, {
+            	             displayName: name, photoURL: photo
+                             })
+                       }
+	     
+            (2) login user  using email password ---------------------------------
+                  const signInUser = (email, password)=>{
+                  setLoading(true) // for solve navigate problem.
+                  return signInWithEmailAndPassword(auth, email, password)
+                 }
+
+            (3) for login using google  ---------------------------------
+                  const signInWithGoogle = () => {
+                  setLoading(true) // for solve navigate problem.
+                  return signInWithPopup(auth, googleProvider)
+                 }
+
+            (4) for login using Github---------------------------------
+
+ 
+            (5) for logOut user  ---------------------------------
+                 const logOut = ()=>{
+                 setLoading(true) // for solve navigate problem.
+                 return signOut(auth) 
+                }
+
+            (6) for observer : it remember user data and user exists or not : must use ---------
+                useEffect(()=>{
+                   const unSubscribe = onAuthStateChanged(auth, currentUser => {
+                   setUser(currentUser);
+                   setLoading(false) // for solve navigate problem.
+                   console.log("observing current useer" , currentUser);  
+                 });
+                 return () => {
+                   return unSubscribe();
+                 }
+          
+               },[])
+
+              const authInfo = {user, createUser, signInUser, logOut, loading, signInWithGoogle, handleUpdateProfile} // send props for call those any where.
+	
+	    (7) some work under component return for context api-------------------------
+                return (
+                   <AuthContext.Provider value={authInfo}> // we make - AuthContext in top for context api. 
+                      {children} // component props.
+                   </AuthContext.Provider>
+                  );
+                };
+
+               export default AuthProvider;
+
+               AuthProvider.propTypes = { // for props type .
+                  children: PropTypes.node
+               }
+
+    (iv) use or push AuthProvider in main jsx for context api ------------
+	  import AuthProvider from './providers/AuthProvider.jsx' // for import auth provider.
+
+	  <React.StrictMode>
+              <AuthProvider> // AuthProvider component.
+                 <RouterProvider router={myRouter} />
+              </AuthProvider>
+            </React.StrictMode>, 
+
+4. private routes  for secure route ------------------------------------
+    (a) make a routes folder in src. make a PrivateRoutes.jsx file in routes folder.
+    (b) Push those code in PrivateRoutes.jsx and chill.
+         (i) for import file. add those codes who is necessery or if auto import not work ------------------
+              import { useContext } from "react"; // for context api.
+              import { AuthContext } from "../providers/AuthProvider"; // for context api what we make as a AuthProvider.
+              import { Navigate } from "react-router-dom"; // for  navigate route.
+              import PropTypes from 'prop-types'; // for props type .
+         
+	(ii) what code we use in AuthProvider component---------------
+	      const PrivateRoutes = ({children}) => { // children is a props. it is that what we want to make private.
+              const { user , loading } = useContext(AuthContext) //   user , loading come from AuthContext.
+
+                 if(loading){
+                    return <div className=" text-4xl text-red-300">Loading...</div> // for loading speaner if loading  found.
+                 }
+
+                 if(user){   // if user found it return user.
+                     return children;
+                 }
+                 return <Navigate to="/login"></Navigate> // if user not found it navigate to login.
+                 };
+
+                 export default PrivateRoutes;
+
+                 PrivateRoutes.propTypes = {  // for props type .
+                    children: PropTypes.node
+                 }
+
+          (iii) use or push PrivateRoutes in Router.jsx for private route ------------
+                 {
+                   path: "/order",
+                   lement: <PrivateRoutes><Order></Order></PrivateRoutes>
+                 }
+
+5. implement firebase in component forms, header ------------------------------------
+	(a)  show user name photo and private route in header -----------------------------------------------------
+	     (i) for import file -------------------------------
+                             import { useContext } from "react";
+                             import { Link, NavLink } from "react-router-dom";
+                             import { AuthContext } from "../../providers/AuthProvider";
+	   
+	     (ii) add those in Header  component ---------------------------------
+                             const {user, logOut} = useContext(AuthContext)
+
+                           const handleLogout = () => { // for logout event handler.
+                               logOut() // come from AuthProvider.
+                               .then(() => {
+                                  console.log("logout successfully");
+                                  })
+                                  .catch(error => {
+                                      console.error(error)
+                                 })
+                             }
+
+	           const navLinks = <> // for daisy ui responsive navbar.
+                                <li><NavLink to='/'>Home</NavLink></li>
+                                <li><NavLink to='/login'>Login</NavLink></li>
+                                 {
+                                     user && <><li><NavLink to='/order'>Order</NavLink></li></> // for private route.
+                                 }
+                             </>
+
+		  
+		{
+                                       user?.email ? <div className="flex  items-center">
+                                            <div className="flex items-center">
+                                                 <img className=" w-6 mx-2 rounded-full" src={user?.photoURL} alt="" />
+                                                <p className=" mr-3  text-sm font-semibold">{user?.displayName}</p>
+                                           </div>
+                                           <NavLink onClick={logOut}>
+                                                 <button className="border p-2 rounded-md">logout</button>
+                                         </NavLink>
+                                          </div>
+                                             :
+                                          <NavLink to='/login'>
+                                                <button className="border p-2 rounded-md">Login</button>
+                                         </NavLink>
+                                  }
+
+
+	      (iii) maybe important for Header jsx  ---------------------------------
+		     <div className="navbar-end"> // implement in dasisy ui responsive navber end.
+                       {
+                         user ? <> // if user found it show user name and logout btn.
+                            <span>{user.email}</span>
+                            <a onClick={handleLogout} className="btn">logout</a> // here we add logout event handler.
+                            </> 
+                             :
+                           <Link to="/login"><span>Login</span></Link> // if user not found it navigate to login.
+                       }
+        	     </div>
+
+          (b) Registration component code emplement-----------------------------------------------------
+	       (i) for import file -------------------------------
+		    import { useContext } from "react";
+                                    import { Link } from "react-router-dom";
+                                   import { AuthContext } from "../../../providers/AuthProvider";
+
+	       (ii) add those in Registration component before return in top ---------------------------------
+                   	      const { createUser, handleUpdateProfile } = useContext(AuthContext)  // come from AuthProvider
+   		       const navigate = useNavigate()
+
+                                       const handleRegister = e => {
+                                                   e.preventDefault();
+                                                    const form = e.target;
+                                                    const name = form.name.value;
+                                                    const email = form.email.value;
+                                                     const password = form.password.value;
+                                                     const photoUrl = form.photoUrl.value;
+                                                console.log(name, email, password, photoUrl);
+
+                                            // for password validations -------------------------------------
+                                                        if (password.length < 6) {
+                                                               alert("Password must be six charecter")
+                                                                return;
+                                                         }
+                                                         else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(password)) {
+                                                                 alert("Password is invalid")
+                                                                 return;
+                                                          }
+			                                   createUser(email, password) // for create user using email and password.
+                                                          .then(res => {
+                                                                   handleUpdateProfile(name, photoUrl) // add photo and name for user.
+                                                          .then(() => {
+                                                                 alert("user create successfully")
+                                                                  navigate("/")
+                                                                })
+                                                            })
+                                                           .catch(err => alert("user create error: "))
+                                                            }
+
+
+                           (iii) maybe important for Registration jsx  ---------------------------------
+		          <form onSubmit={handleRegister} className="card-body"> // add here event handler.
+                            		<input type="email" placeholder="email" name="email" className="input input-bordered" required /> // give name here.
+                            		<input type="password" placeholder="password"   name="password"  className="input input-bordered" required />  // give name here.
+                           		 <div className="form-control mt-2">
+                              		       <button className="btn btn-primary">Register</button>
+                            		</div>
+                                          </form>
+                                          <p className=" p-4">already have acc? <Link to="/login">login now</Link></p> // give here toggle route.
+		
+
+          (c)  login component code emplement -----------------------------------------------------
+   	          (i) for import file -------------------------------
+                                     import { useContext } from "react";
+		     import { Link, useNavigate } from "react-router-dom";
+		     import { AuthContext } from "../../../providers/AuthProvider";
+		     import { sendPasswordResetEmail } from "firebase/auth"; // for reset password.
+
+	          (ii) add those in Login component ------------------------------------
+		      const {signInUser , signInWithGoogle} = useContext(AuthContext) // come from  AuthProvider for email login & google login.
+                      	      const navigate = useNavigate() // for navigate.
+		   	
+ 		      const emailRef = useRef(null) // user for get email from outside of form. use - ref={emailRef} in input field.
+                                       ---- example  {/* <input type="email" name="email" ref={emailRef} required /> */ }
+
+		    (1) login using email password -----------------------------------
+                                              const handleLogin = e => { // event handler for email pass login.
+                                                     e.preventDefault(); // for solve form reload problem.
+                              		     const email = e.target.email.value;  // for get value from input field.
+                              		     const password = e.target.password.value;  // for get value from input field.
+                             		     console.log(email, password);
+			     if (password.length < 6) {
+            			             alert("Password must be six charecter")
+           			             return;
+      		                      }
+                              		     signInUser(email, password)  // for login or signin using email, pass--------
+                             		           .then(res =>{
+				 alert("login successful")
+                                 		  // console.log(res.user);
+                                 		 e.target.reset(); // for clear form field.
+                                  		 navigate("/")
+                            			  })
+                              			.catch(error => {
+                                 		      // console.error(error);
+				      alert("Sorry wrong user , pass")
+                             		                })
+                         		    }
+	                          (2) Reset password using email  --------------------------------------------------------
+			        const handleForgetPassword = () => {
+       				 const email = emailRef.current.value; // for get value from form email field using ref.
+       				 if (!email) {
+           				       console.log("please provite an email", emailRef.current.value);
+           				 return;
+       				 }
+       				 else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+           				        console.log("please write a valid email");
+          				        return;
+       				 }
+       				 sendPasswordResetEmail(auth, email)
+           				     .then(() => {
+              			                           alert("please check your email")
+           				       })
+           				       .catch(err => {
+               					 console.log(err);
+          				      })
+   			             }
+
+  		         (3) login using google -----------------------------------
+                          		     const handleGoogleSignin = () =>{  // event handler for google login.
+                               		     signInWithGoogle() // for login or signin using google--------
+                                                          .then(result => {
+                                   		 console.log(result.user);
+                                    		  navigate("/")
+                               		            })
+                                		.catch(error => {
+           			    	console.error(error);
+                               		           })
+                          		     }
+
+             (iii) maybe important for Login jsx  ---------------------------------
+		<form onSubmit={handleLogin} className="card-body">  // event handler for email sign in.
+               		        <input type="email" placeholder="email" name="email" className="input input-bordered" required />
+               		        <input type="password" placeholder="password" name="password"  className="input input-bordered" required />
+                	        <div className="form-control mt-2">
+                	               <button className="btn btn-primary">Login</button>
+                       	        </div>
+                  	  </form>
+		   <p className=" p-4">New Here? <Link to="/register">Register</Link></p> // give here toggle route.
+                  	  <button onClick={handleGoogleSignin} className="px-3 py-2 border  bg-green-300">Google login</button> // event handler for google sign in.
+
+	  (iv) maybe important for reset email ---------------------------------
+            		   <div className="form-control">
+                            	           <label className="label font-bold">
+                                                  <span className="label-text">Email</span>
+                                           </label>
+                                            <input type="email" placeholder="email" name="email" ref={emailRef} className="input input-bordered" required />
+                                    </div>
+
+
+ 
+6. make secure firebase data ------------------------------------
+     (a) make a file .env.local  in root or with package.json .
+     (b) insert or push all code in .env.local file .
+		VITE_APIKEY = AIzaSyCtezSh2Ifgcu-cMAeIf1Sh6DJOquBnQXE // give here firebase.confige file data.
+		VITE_AUTHDOMAIN = dragon-news-dd28f.firebaseapp.com  // give here firebase.confige file data.
+		VITE_PROJECTID = dragon-news-dd28f  // give here firebase.confige file data.
+		VITE_STORAGEBUCKET = dragon-news-dd28f.appspot.com  // give here firebase.confige file data.
+		VITE_MESSAGINGSENDERID = 728970600605   // give here firebase.confige file data.
+		VITE_APPID = 1:728970600605:web:3B05A0451E7E74C5BEB47   // give here firebase.confige file data.
+
+     (c) add all property name in firebase.config file---------------
+ 		apiKey: import.meta.env.VITE_APIKEY ,
+  		authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  		projectId: import.meta.env.VITE_PROJECTID,
+  		storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  		messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  		appId: import.meta.env.VITE_APPID,
+
+
+
+
+

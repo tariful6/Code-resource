@@ -1,0 +1,144 @@
+Load spasefic data base on email : using queery ===================
+1. first use firebase for authentication and get email.
+2. Post email and other data in server ----------------------------
+  = Client side : post data----------------------------------------
+       const {user} = useContext(AuthContext) // for get email.
+       const service = useLoaderData(); // for get signgle data from route - using params loader.
+       const {_id, title, price, img} = service; // destructure single data.
+
+       const handleConfirmOrder = e => {
+          e.preventDefault();
+          const form = e.target;
+          const name = form.name.value;
+          const date = form.date.value;
+          const email = form.email.value;
+
+        const order  = {
+            customerName : name,
+            email,
+            date,
+            img,
+            service : title,
+            service_id: _id,
+            price: price
+         };
+         fetch("http://localhost:5000/bookings", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+         })
+         .then(res => res.json())
+         .then(data => {
+            console.log(data);
+            if(data.insertedId){
+                alert("service added")
+            }
+         })
+       }
+
+
+     <form onSubmit={handleConfirmOrder} className="card-body w-full">
+          <div className=" grid grid-cols-2 gap-6">
+              <div className="form-control">
+                   <label className="label">
+                      <span className="label-text">Name</span>
+                   </label>
+                   <input type="text" name="name" placeholder="name" defaultValue={user?.displayName} className="input input-bordered" required />
+              </div>
+              <div className="form-control">
+                   <label className="label">
+                      <span className="label-text">Date</span>
+                   </label>
+                   <input type="date" name="date" className="input input-bordered" required />
+               </div>
+           </div>
+
+           <div className="form-control mt-6">
+               <input className="btn btn-primary" type="submit" value="confirm order" />
+           </div>
+      </form> 
+
+
+  = Server side : post data----------------------------------------------------
+     app.post("/bookings", async (req, res) => {
+       const booking = req.body;
+       console.log(booking);
+       const result = await bookingCollection.insertOne(booking);
+         res.send(result);
+     });
+
+
+3. Get email related data from server -------------------------------------------
+  = Client side : get data-------------------------------------------------------
+      const {user} = useContext(AuthContext);
+      const [bookings, setBookings] = useState([]);
+
+      const url = `http://localhost:5000/bookings?email=${user.email}`;
+      useEffect(()=> {
+        fetch(url)
+         .then(res => res.json())
+         .then(data => setBookings(data))
+      },[url])
+
+  = Server side : get data-------------------------------------------------------
+      app.get("/bookings", async (req, res) => {
+        let query = {};
+        if (req.query?.email) {
+           query = { email: req.query.email };
+        }
+        const result = await bookingCollection.find().toArray();
+        res.send(result);
+     });
+
+4. use Private route for solve reload problem  -----------------------------------
+    =  Private route codes -------------------------------------------------------
+	import { useContext } from "react";
+	import { AuthContext } from "../Provider/AuthProvider";
+	import { Navigate } from "react-router-dom";
+
+	const PrivateRoute = ({children}) => {
+        const {user, loading} = useContext(AuthContext);
+        if(loading){
+           return <h1 className=" text-red-400 text-4xl text-center py-10">Loading...</h1>
+        }
+
+        if(user?.email){
+          return children;
+        }
+          return <Navigate to='/signIn'></Navigate>
+	};
+	export default PrivateRoute;	
+
+    = Apply Private route in route ----------------------------------------------------
+	{
+          path: 'bookings',
+          element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
+        }
+
+
+
+=======================================XXX================================================
+
+1. Load Specific Data from server -------------------------------------------------------
+   = clientside code --------------------------------------------------------------------
+      {
+          path: "services/:id",
+          element: <ServiceDetails></ServiceDetails>,
+          loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+      },
+
+   = server side code -------------------------------------------------------------------
+       app.get("/services/:id", async (req, res) => {
+         const id = req.params.id;
+         const query = { _id: new ObjectId(id) };
+         const options = {
+           projection: { title: 1, price: 1, service_id: 1, img: 1 },
+         };
+       const result = await serviceCollection.findOne(query, options);
+       res.send(result);
+      });
+
+
+	

@@ -1,0 +1,49 @@
+Wordpress setup Localy ===================================================
+1. download wordpress file and extract this.
+2. go to xamp > htdocs file and create a folder with any name.
+3. insert all wordpress extract file in your recent created folder.
+4. start apache and mysql in xamp
+5. click on mysql admin from xamp or go to -- http://localhost/phpmyadmin/
+6. create database from new and give any name of database. but remember it.
+7. click on apache admin from xamp or go to -- http://localhost/dashboard/
+8. replace dashboard with your htdoc foldername from path.
+	= http://localhost/dashboard/
+	= http://localhost/folershop
+
+9. for configer wordpress setup do some work .
+	1. select language in english and do continue with lets go.
+	2. give database name what you create some times before.
+	3. give username root as always. you can,t use other name.
+	4. keep password field blank always. if any password exits remove all.
+	5. give datbase host name -- localhost.
+	6. give Table Prefix name --- wp_
+	7. submit and run the installation.
+
+10. for configer wordpress dashboard and configer admin.
+	1. give side title base on your project website.
+	2. give Username - example : tariful4
+	3. give password - example : !6S#ckE1hfcq^bCzet
+	4. give email    - example : mdtarifulislam4@gmail.com
+	5. install wordpress.
+
+11. maintainace wordpress --------
+ 	for login wordpress : http://localhost/woocomearce/wp-login.php
+	for live wp site : http://localhost/woocomearce/ 
+
+12. for configer wordpress general setting 
+	1. task one : goto setting > general :
+ 		1. give your webside name (FLRSHOP) in -- Site Title field.
+		2. give Tagline base on your webside. example : Best flower shop in Bangladesh.	
+	
+	2. task two : goto setting > Reading :
+		1.  For set default homepage : Set - Your homepage displays >  checked into - A static page.
+		2. Select Homepage - what you want to make default.
+
+	3. task three : goto setting > Permalink  :
+		1. Select - Permalink structure : use Post name.
+       
+
+tariful4
+66aWo*l%GIrT2IMSL0
+	
+

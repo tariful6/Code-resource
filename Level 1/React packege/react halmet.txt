@@ -1,0 +1,21 @@
+Halmet use using Js -----------------------------------------
+
+
+Halmet use using react --------------------------------------
+ 
+1. install halmet packege..
+	npm i react-helmet-async
+2. import this in main jsx and wrap <RouterProvider> with <HelmetProvider>
+	import { HelmetProvider } from 'react-helmet-async';
+	
+	<HelmetProvider>
+            <RouterProvider router={myRouter} />
+        </HelmetProvider>
+
+3. impoer halmet those page where you want to use halmet.
+	import { Helmet } from "react-helmet-async";
+
+4. insert those code under return inside div ...
+      <Helmet>
+            <title>Bristo Boss | Menu</title>
+      </Helmet>

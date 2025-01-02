@@ -1,0 +1,788 @@
+TypeScript =====================================================================
+    typeScript develoved by Microsoft. it came 2012. it is a javascript supperset
+    it use for support old js in every browser.
+
+Install TypeScript for basic project ---------------------------------------------------
+	npm install -g typescript  // do it one time if you not install before.
+	tsc --v  // for check Ts version
+	make two folder in foot. one folder name will be dist. and anather folder name will be src.
+        make index.html file in dist folder. and make index.ts file in src folder.
+	tsc -init  // for initialize tsconfig.json file
+        goto tsconfig.json file and do configer rootdir and outdir,
+	   "rootDir": "./src",
+	   "outDir": "./dist",
+	tsc -w  // for auto convert ts file to js file.
+	go to index.html file and link index.js file to html file.
+	open html file with live server
+
+
+TypeScript Datatypes ===============================================================
+    Primitive type : string, number, Boolean, null, undefined
+    String type --------------------------------------------------------------------
+	let a : string = "hello world";
+	console.log(a);
+
+	let aa = <string> "hi world"; // generic way.
+	console.log(aa);
+
+    Number type --------------------------------------------------------------------
+	let b : number = 120;
+	console.log(b);
+
+	let bb = <number> 120;  // generic way.
+	console.log(bb);
+
+    Boolean type --------------------------------------------------------------------
+	let c : boolean = true;
+	console.log(c);
+
+	let cc = <boolean> true;  // generic way.
+	console.log(cc);
+
+
+
+   Null type--------------------------------------------------
+	const searchName = (value : string | null) => {
+           if(value === null){
+              console.log("theere is nothing to search");   
+    	   }
+   	   else{
+               console.log("search......");   
+           }
+	}
+	searchName(null);
+
+
+  Unknown type-------------------------------------------------
+	const getMyCar = (speed:unknown)=> {
+    	   if(typeof speed === 'number'){
+               const convertedSpeed = (speed * 1000) / 3600;
+               console.log(`my speed is${convertedSpeed}`);
+   	    }
+           if(typeof speed === 'string'){
+              const [value, unit] = speed.split(' ');
+              const convertedSpeed = (parseFloat(value) * 1000) / 3600;
+              console.log(`my speed is${convertedSpeed}`);
+          }else{
+             console.log("there is no type");
+          }
+        }
+	getMyCar(10)
+	getMyCar('10 kmh^-1')
+	getMyCar(true)
+
+   Never type : when any function never return anytings we can use this ------
+	function throwError(message:string): never{
+    	    throw new Error(message);
+	}
+	throwError("bhai error hoiche")
+
+
+  Ternary Operator ---------------------------------------------
+	const age: number = 15;
+	const isAdult = age > 18? "yes" : "no";
+	console.log(isAdult);
+
+
+
+  Nullish Coeslancing Operator means null & undefined. it work base on null and undifined -------
+   
+	const isAuthenticatedUser = undefined;
+	const userName = isAuthenticatedUser ?? "Guest"; // ?? this mark called nullish.
+	console.log(userName);
+
+	type Manush = {
+    	   name : string;
+    	   age : number;
+    	   adress : {
+             city : "no City";
+             road : "no Road"
+             home?: ''
+    	   }
+	}
+	const manush1:Manush ={
+    	   name : "manush",
+    	   age : 20,
+    	   adress : {
+       	     city : "no City",
+             road : "no Road"
+   	  }
+	}
+	const home = manush1?.adress?.home?? 'no home'
+	console.log(home);
+
+
+   Union type -------------------------------------------------------
+
+	let surname : string | number;
+    	    surname = "dddd";
+            surname = 123;
+	console.log(surname);
+
+
+
+	type NoobDeveloper = {
+    	   name : string;
+	}
+	type JuniorDeveloper = {
+    	   name : string;
+    	   expertise :string;
+    	   experience : string;
+	}
+	const newDeveloper: NoobDeveloper  | JuniorDeveloper = {
+    	   name : "Raj",
+    	   expertise : "React",
+    	   experience : "1 year"
+	}
+	console.log(newDeveloper);
+
+   Intersection type : when we used & its called interscetion ---------------------------------------------
+
+	type NoobDeveloper = {
+    	    name : string;
+	}
+	type JuniorDeveloper = NoobDeveloper & {
+    	   expertise :string;
+           experience : string;
+	};
+	const newDeveloper: JuniorDeveloper = {
+    	   name : "Raj",
+    	   expertise : "React",
+    	   experience : "1 year"
+	}
+	console.log(newDeveloper);
+
+
+   Array types -------------------------------------------------------
+
+	const arr:number[] = [11,55,22,44,66,77]; // here only allow number.
+	const arr1: Array<number> = [11,55,22,44,66,77]; // generic way.
+
+	const arry:string[] = ["gg", "rr", "rrr"]; // here only allow string.
+	const arry2:Array<string> = ["gg", "rr", "rrr"]  // generic way.
+
+
+	type arrType = string | number;
+	const array1:arrType[] = [12,45,56,"ff", "tt","ee"]; // here only allow string.
+	console.log(array1);
+
+	const array:Array<string | number> = [12,45,56,"ff", "tt","ee"];  // generic way.
+
+
+   Array tuple : in this example we can add here 3 number only.-----
+	const arr: [number, number, number] = [11,22,55]
+	console.log(arr);
+
+
+
+   Spread operator -----------------------------------------------------------
+ 	const myFriends:Array<string | number> = ["aa", "bb", "cc",];
+	const newFriends:Array<string | number> = ["dd", "ee", "ff"];
+	   myFriends.push(...newFriends);
+	console.log(myFriends)  ;
+
+
+   Rest operator -------------------------------------
+	const getFriends = (...friends:string[]): void => console.log(friends);
+	getFriends("aa", "bb", "cc", "dd", "ee", "ff");
+
+
+	const getFriends = (...friends:string[])=>{
+    	   console.log(friends);
+	};
+	getFriends("aa", "bb", "cc", "dd", "ee");
+
+
+	const getFriends = (...friends:string[])=>{
+   	   friends.forEach((friend)=> console.log(`hi -${friend}`));
+	};
+	getFriends("aa", "bb", "cc", "dd", "ee");
+
+
+
+    Array & object Destructuring  : we never use type in obj destructuring ---
+
+	const friends = ["aa", "bb", "cc"];
+	const [anyName] = friends;
+	console.log(anyName);
+
+
+	const myFriends = {
+    	  fname: "abdul",
+          age : 24
+	}
+	const {fname} = myFriends;
+
+
+  Object types ------------------------------------------------------------
+    = basic object syntax --------------------------------------------------
+	const obj:{
+   	   height : number;
+    	   width : number;
+	} = {
+    	   height : 123,
+           width : 4124,
+        }
+
+    = proper object syntax Type Alias ----------------------------------
+	type Obj = {
+    	    height : number;
+            width : number;
+            gender?: boolean;  // we make this optional using -- ?
+        }
+        const obj:Obj = {
+            height : 123,
+            width : 555,
+            gender : true,
+        }
+       const obj2:Obj = {
+           height : 443,
+           width : 665,
+       }
+
+
+    = interface : when we have to use class that place we use interface -------
+	interface Obj {
+    	     height : number;
+             width : number;
+             gender?: boolean;  // we make this optional using -- ?
+        }
+
+       interface Obj2 extends  Obj {
+           scoller : boolean;
+           func?: (n:number, m:number) => void;
+        }
+
+       const obj1:Obj2 = {
+           height : 123,
+           width : 555,
+           scoller : true,
+           func : (n, m) => {
+              console.log(n * m);
+           }
+        }
+       obj1.func(11,22) // it give error for optional parameter
+
+      const obj2:Obj = {
+          height : 123,
+          width : 555,
+          gender : true,
+       }
+          const obj3:Obj = {
+          height : 443,
+          width : 665,
+       }
+
+
+
+Function type ===================================================
+	function add(num1:number, num2:number):number{
+    	      return num1 + num2;
+	}
+	console.log(add(5,20));
+
+
+	const func = (n:number, m:number):number => {
+	     // return String(n+ m)  // we don't return string bcz we declare number.
+   		return n + m ;
+	}
+
+
+   function make parameter time shorter -------------------------------------
+	type UserName = (n:string, m:number)=>string;
+	const func:UserName = (n, m) => {
+   	      return n + m 
+	}
+
+   function with define type ------------------------------------
+	type FuncType = (n: number, m:number, l?:number) => number ;
+	const func:FuncType = (n, m, l) => {
+   	     if(typeof l === 'undefined'){
+                 return  n * m;
+             }
+          return n * m * l;
+        }
+        func(22,55)
+
+   function default value : must use default value in last parameter -------
+ 	type FuncType = (n: number, m:number, l?:number) => number ;
+	const func:FuncType = (n, m, l=20) => {
+   	     return n * m * l;
+	}
+	func(22,55)
+
+
+   function default value with define shortest way-----------
+	const func = (n:number, m:number, l:number=20):number => {
+    	     return n * m * l;
+	}
+	func(22,55)
+
+   rest operator ----------------------------------------
+	const func = (...m:number[]) => {
+            return m
+	}
+	func(22,55)
+
+
+	type FuncType = (...m:number[]) => number[] ;
+	const func:FuncType = (...m) => {
+    	    return m
+	}
+	func(22,55)
+
+   function with object with type --------------------------------
+	type getDataType = (product: {
+    	    name: string;
+            stock : number;
+    	    price: number;
+   	    photo: string;
+	}) => void;
+
+	const getData:getDataType = (product)  => {
+    	   console.log(product);
+	}
+
+	const productOne = {
+    	    name: "APPle",
+   	    stock : 56,
+    	    price : 100,
+    	    photo: "chotourl"
+	}
+	getData(productOne)
+
+
+
+   function with object with interface --------------------------------
+
+	interface Product {
+    	    name: string;
+            stock : number;
+            price: number;
+            photo: string;
+            readonly id:string;
+        }
+
+       type getDataType = (product:Product) => void;
+       const getData:getDataType = (product)  => {
+           product.name= "Samsunt",
+        // product.id = "fffff", // we cannot change it bcz it is readonly.
+           console.log(product);
+       }
+
+	const productOne:Product = {
+           id : "123",
+           name: "APPle",
+           stock : 56,
+           price : 100,
+           photo: "chotourl"
+	}
+	getData(productOne)
+
+
+   never type ----------------------------------------------------------------
+
+	const errorHandler = ():never => {
+    	   throw new Error();
+	}
+
+
+
+  Type Assertion means - i know type better then type script using (as) we make Assertion -----------
+	let amni: any;
+   	   amni = "Next level development";
+   	 (amni as string).length;
+
+
+	let amni: any;
+    	   amni = "Next level development";
+   	<string>amni.length;
+
+
+	function kgToGram(param: string | number): string | number  | undefined{
+   	    if(typeof param === "string"){
+            const value = parseFloat(param) * 1000;
+            return `The result is ${value} gram`;
+          }
+          if(typeof param === "number"){
+            const value = param * 1000;
+            return `The result is ${value} gram`;
+          }
+	}
+	const resultToNumber = kgToGram(1000) as number;
+	// const resultToNumber = <number>kgToGram(1000) ;
+	const resultToString = kgToGram("1000") as string;
+	// const resultToString = <string>kgToGram("1000") ;
+
+
+  Generic In Type ------------------------------------------------------------------
+	const rollNumbers: Array<number> = [1, 2, 3, 4, 4]
+	const rollNumbers2: Array<string> = ["a", "b", "c", "d", "e"]
+	const rollNumbers3: Array<boolean> = [true, false, false]
+	const userNameAndRollNumber : Array<{name: string; roll : number}> = [
+    	    {
+               name: "A",
+               roll: 1
+    	    },
+    	    {
+        	name: "B",
+        	roll: 2
+    	    },
+	]
+
+
+
+  Use Generic using type type --------------------------------------------------
+	type GenericTuple<X,Y> = [X,Y]; // we can pass multiple argument usinfle tuple.
+	const relation : GenericTuple<string, string> = ["Persian", "kate Winslet"];
+	const salaryWithRelation : GenericTuple<{name:string, salary:number}, string> =[{
+    	    name: "Persian",
+    	    salary : 100000,
+	}, "Kate Winslet"]
+
+
+
+	type GenericArray<T> = Array<T> // here T is a parameter. it recived as a argument type.
+	const rollNumbers: GenericArray<number> = [1, 2, 3, 4, 4];
+	const rollNumbers2: GenericArray<string> = ["a", "b", "c", "d", "e"];
+	const rollNumbers3: GenericArray<boolean> = [true, false, false];
+
+
+	type GenericArray<T> = Array<T> // here T is a parameter. it recived as a argument type.
+	const userNameAndRollNumber : GenericArray<{name: string; roll : number}> = [
+    	    {
+                name: "A",
+                roll: 1
+    	    },
+    	    {
+                name: "B",
+        	roll: 2
+    	    },
+	]
+
+
+
+  use Generic using type type ------------------------------------------------------------
+	type GenericTuple<X,Y> = [X,Y]; // we can pass multiple argument usinfle tuple.
+	type RelationWithSalertType  = {name:string, salary:number}
+	const relation : GenericTuple<string, string> = ["Persian", "kate Winslet"];
+	const salaryWithRelation : GenericTuple<RelationWithSalertType, string> =[{
+    	    name: "Persian",
+    	    salary : 100000,
+	}, "Kate Winslet"]
+
+
+  use Generic using interface type -------------------------------------------------------
+	type GenericTuple<X,Y> = [X,Y]; // we can pass multiple argument using tuple.
+	interface RelationWithSalertType {name:string, salary:number} // we make code shorter using this.
+	const relation : GenericTuple<string, string> = ["Persian", "kate Winslet"]; // here we pass two arguments.
+	const salaryWithRelation : GenericTuple<RelationWithSalertType, string> =[{
+    	    name: "Persian",
+    	    salary : 100000,
+	}, "Kate Winslet"]
+
+
+   interface object generic type --------------------------------------
+	interface CrushInterface<T,U=null>{
+    	   name : string;
+    	   husband : T,
+    	   wife ?: U;
+	}
+	const crush1 : CrushInterface<boolean, string> = {
+    	   name : "A",
+    	   husband : true,
+    	   wife : "kate"
+	}
+	const crush2 : CrushInterface<string> = {
+    	   name : "A",
+    	   husband : "kuddus"
+	}
+	const crush3 : CrushInterface<{name: string; age: number}> = {
+    	   name : "A",
+    	   husband : {
+             name : "B",
+             age : 20
+    	   }
+	}
+	const crush4 : CrushInterface<{name:string; age : number}, {name:string; age : number}> = {
+    	   name : "Kate",
+    	   husband : {
+              name : "Tariful",
+              age : 26,
+    	   },
+    	   wife : {
+       	     name : "Winslet",
+             age : 50
+    	  }
+	}
+
+
+
+
+   Generic In Function  ------------------------------------------------------------
+	const createArray = <T>(param: T): T[] => {
+    	    return [param];
+	}
+	const result1 = createArray <string>("bangladesh")
+	const result2 = createArray <boolean>(true)
+	const result3 = createArray <{name : string}>({name: "bangladesh"})
+
+
+   Generic In Function with tuple  ----------------------------------------------------
+	function createArray1 <X,Y>(param1: X, param2: Y): [X,Y]{ // in normal function.
+    	   return [param1, param2];
+	}
+
+
+	const createArray2 = <X,Y>(param1: X, param2: Y): [X,Y] => {
+    	   return [param1, param2];
+	}
+	const result1 = createArray2  <string, string>("bangladesh" , "beautiful");
+	const result2 = createArray2 <boolean, Array<string>>(true, ['Usa']);
+	const result3 = createArray2 <{name : string}, boolean>({name: "bangladesh"}, false);
+
+
+	const myInfo = {
+    	   name: "bangladesh",
+    	   age: 20,
+    	   salary : 1000000
+	}
+	const addMyCrusheMind = <T>(myInfo:T) => {
+    	   const crush = "kate winslet";
+   	   const newData = {...myInfo, crush};
+    	   return newData;
+	}
+	const result = addMyCrusheMind(myInfo);
+
+
+   Constraints In Generics -: when we decide Generics types its called - extend -------------------
+
+	const addMyCrusheMind = <T extends {name: string, age:number, salary:number}>(myInfo:T) => {
+    	const crush = "kate winslet";
+   	const newData = {...myInfo, crush};
+   	    return newData;
+	};
+	type MyInfoType ={
+   	    name: string;
+    	    age: number;
+    	    salary : number;
+    	    other1 : boolean;
+    	    other2 : null
+	}
+	const myInfo:MyInfoType = {
+    	   name: "bangladesh",
+    	   age: 20,
+   	   salary : 1000000,
+    	   other1 : false,
+    	   other2 : null
+	}
+	const result = addMyCrusheMind<MyInfoType>(myInfo);
+	const result2 = addMyCrusheMind <MyInfoType>({ name: "bangladesh", age: 20, salary : 1000000, other1: 	false, other2: null });
+
+
+   Generic Constraints Using Key  ----------------------------------------------------------------
+	type PersonType = {
+   	  name: string;
+   	  age: number;
+    	  adress : string;
+	}
+	type newTypeUsers = keyof PersonType
+	const a : newTypeUsers = "adress"
+
+	function gerProperty <X, Y extends keyof X>(obj: X, key: Y){obj[key]}
+	const property = gerProperty({name : "Mr X", age : 20}, "age")
+
+
+
+
+   Asynchronous TypeScript  ------------------------------------------
+	interface ITodo {
+   	   userId: number;
+    	   id: number;
+    	   title: string;
+           completed: boolean;
+	}
+	const getTodo = async ():Promise <ITodo> => {
+    	const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    	    return await response.json();
+	}
+	const getTodoData = async (): Promise<void> => {
+    	const result = await getTodo();
+   	   console.log(result);
+	}
+	getTodoData()
+
+
+
+
+	const makePromise = (): Promise<string> => {
+    	    return new Promise<string>((resolve, reject) => {
+            const data : string = 'Data is fached'
+            if(data){
+               resolve(data);
+            }
+            else{
+              reject("failed to fatch data")
+       	     }
+          })
+	}
+	const getPRomiseData = async(): Promise<string> => {
+    	   const data = await makePromise();
+    	   return data;
+	}
+
+
+
+	const makePromise = (): Promise<boolean> => {
+    	   return new Promise<boolean>((resolve, reject) => {
+           const data : boolean = true;
+           if(data){
+              resolve(data);
+           }
+           else{
+              reject("failed to fatch data")
+             }
+          })
+	}
+	const getPRomiseData = async(): Promise<boolean> => {
+    	   const data = await makePromise();
+    	   return data;
+	}
+
+
+
+	type DataType = {
+    	   data : string;
+	} 
+	const makePromise = (): Promise<DataType> => {
+    	    return new Promise<DataType>((resolve, reject) => {
+            const data : DataType = {data : "data is fached"};
+            if(data){
+               resolve(data);
+            }
+            else{
+               reject("failed to fatch data")
+            }
+          })
+	}
+	const getPRomiseData = async(): Promise<DataType> => {
+    	   const data = await makePromise();
+    	   return data;
+	}
+
+
+
+    Conditional Types ----------------------------------------------------------------
+
+	type a1 = null;
+	type a2 = undefined;
+	type a3 = number;
+	type a4 = a1 extends string ? string : null
+	type a5 = a1 extends null ?  null : a3 extends number ? number : a4 extends null ? null : never;
+
+
+	type seikh = {
+    	   wife1 : string;
+    	   wifi2 : string;
+	}
+	type A = keyof seikh;
+	type CheckProprty <T, K> = K extends keyof seikh? true : false ;
+	type CheckWife1 = CheckProprty<seikh, "wife1">
+
+
+	type bondhubi ="Monika" | "Ricel" | "Phobe";
+	type RemoveBandhubi <T> = T extends "Ricel" ? never : T
+	type CurrentBandhubi = RemoveBandhubi<bondhubi>;
+
+
+	type bondhubi ="Monika" | "Ricel" | "Phobe";
+	type RemoveBandhubi <T, K> = T extends K ? never : T
+	type CurrentBandhubi = RemoveBandhubi<bondhubi, "Monika">;
+
+
+   Mapped Types---------------------------------------------------------------------
+	const arrayOfNumbers = [1, 2, 3];
+	const arryOfStrings = arrayOfNumbers.map(num => num.toString());
+	console.log(arryOfStrings);
+
+
+	type AddNumber ={
+    	    height : number;
+    	    width : number;
+	}
+	type AreaString = {
+    	    height : string;
+    	    width : string;
+	}
+	type AreaReadonly = {
+   	    readonly height : number;
+   	    readonly width : number;
+	}
+	const RactangularArea : AreaReadonly= {
+    	    height : 10,
+    	    width : 20
+	};
+	type A = AddNumber["width"]
+	type b = keyof AddNumber;
+
+
+
+	type Volume ={
+    	   height : number;
+    	   width : number;
+           depth : number
+	}
+	type Area = {
+    	   [key in keyof Volume] : number
+	}
+	type AreaString = {
+    	   height : string;
+    	   width : string;
+	}
+	type AreaReadonly = {
+   	   readonly height : number;
+   	   readonly width : number;
+	}
+	const RactangularArea : AreaReadonly= {
+   	   height : 10,
+    	   width : 20
+	};
+	type A = AddNumber["width"]
+	type b = keyof AddNumber;
+
+
+
+	type Volume ={  // dynamic -----
+    	    height : number;
+    	    width : number;
+    	    depth : number
+	}
+	type Area = {
+            [key in keyof Volume] : Volume[key]
+	}
+	type AreaString = {
+    	    height : string;
+    	    width : string;
+	}
+
+
+	type Volume ={  // dynamic with generic-----
+    	    height : number;
+            width : string;
+            depth : number
+	};
+	type Area<T> = {
+   	    readonly [key in keyof T] : T[key]
+	}
+	const area1: Area<{height : number; width : string;}> = {height : 10, width : "55" }
+            type AreaString = {
+    		height : string;
+    		width : string;
+	   }
+
+
+
+
+
+
+

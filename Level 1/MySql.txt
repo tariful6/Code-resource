@@ -1,0 +1,338 @@
+
+01 : install :
+        MySql Shell
+        MySql Workbench
+        MySql Server
+	give easy password installition time for easy to remember.
+
+02 : copy this link from c deive after installition.
+        C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+03 : search and open system enverment variable -- enviroment variable 
+        -- system variables -- path -- New -- paste here server path link. ok ok
+
+04 : For check installation complete or not:
+        open cmd - command promt.
+        mysql --version
+
+05 : for open and create database add these in cmd:
+        mysql -u root -p  // for open user and password.
+        give password 
+        show databases;  // for show all available database.
+        create database databaseName; // for create database you can give any name here.
+
+06 : open Sql Workbench software :
+	open Mysql connections and give password
+	
+
+
+Work on Apache -----------------------------------------------------------------     
+
+For create database : ----------------------------------------------------------   
+
+= SHOW DATABASES;  // for see all database.
+= CREATE DATABASE collage;  // for create database.
+= DROP DATABASE collage;  // for delete database.
+
+
+DataType for table-----------------------------------------------------------------------
+==> Number data type :
+	.SMALLINT
+	.INT
+	.BIGINT
+	
+	.FLOAT
+	.DOUBLE(M,D)
+	.DECIMAL(M,D)
+
+==> Character data type :
+	.Char(m)
+	.Varchar(m)
+	.text
+
+==> Date and Time data type :
+	.YEAR(YYYY)
+	.DATE(YYYY-MM-DD)
+	.TIME(HH:MM:SS)
+
+
+Creating a Table  Formet--------------------------------------------------------------
+NB : before create table you have to create database. and table must be create 
+     under database. 
+
+1. First go to database. 
+2. = CREATE TABLE any_table_name(
+     any_column_name1 data_type(size),
+     any_column_name2 data_type(size),
+     any_column_name3 data_type(size),
+
+     PRIMARY KEY( give here primary key name) // must insert it.
+);
+
+example : -----------------
+
+CREATE TABLE studunt(
+  Roll int(5),
+  Name varchar(20),
+  Gender varchar(10),
+  Age int(5),
+  GPA double(3,2),
+  City varchar(15),
+  PRIMARY KEY(Roll)
+);
+
+For Show Table structure : ---------------------------------------------------------
+ 1. = DESCRIBE table_name;
+    DESCRIBE studunt;
+
+Rename Table  Formet--------------------------------------------------------------
+1. First go to database. 
+2. = RENAME TABLE give_table_name_here_what_you_want_to_replace TO give_here_new_name;
+   = RENAME TABLE student TO student_details; // example
+
+Delete table ----------------------------------------------------------------------
+  1. First go to table database.
+  2. = DROP TABLE table_name_what_you_want_to_delete; 
+       DROP TABLE table_details;
+
+Insert value in Table : ------------------------------------------------------------
+ 1.  First go to table.
+ 2.= INSERT INTO table_name(give here all key field all name)
+ 3.= VALUES(give here all value);
+
+  = INSERT INTO studunt(Roll,Name,Gender,Age,GPA,City) // you can ignore this line. 
+  = VALUES  // only value can insert data without insert key field data.
+   (101,'Tariful', 'Male', 25, 3.44,'Kurigram'),
+   (102,'Badman', 'Male', 26, 3.54,'Bhrungamary'),
+   (103,'Monster', 'Male', 27, 3.84,'Andharijhar');
+
+Find Coloumn all data from Table : ----------------------------------------------------------
+  1. First go to table.
+  2. = SELECT coloumn_name FROM table_name; // for single coloumn.
+     SELECT Name FROM studunt;
+
+  2. = SELECT coloumn_name, coloumn_name, coloumn_name, FROM studunt; // for multiple coloumn.
+     SELECT Roll, Name, City FROM studunt;
+
+  2. = SELECT * FROM table_name; // for all coloumn.
+     SELECT * FROM studunt;
+
+Find unique data with out repeat same data from coloumn  using DISTINCT : ------------------------
+  1. First go to table.
+  2. = SELECT DISTINCT coloumn_name FROM table_name; // here same data never repeat.
+     SELECT DISTINCT City FROM studunt;
+
+Find spasific row from table : -------------------------------------------------------------------
+  1. First go to table.
+  2. = SELECT * FROM table_name LIMIT amount_of_row;
+     SELECT * FROM studunt LIMIT 3;
+
+  2. = SELECT * FROM table_name LIMIT amount_of_row, amount_of_row; // for spasific row.
+     SSELECT * FROM studunt LIMIT 2,4;
+
+Sorting table data : A - Z 1 - 9 ---------------------------------------------------
+   Assending Way : A to Z, 1 to 9 : ----------------
+      1. First go to table. // only coloumn.
+      2. = SELECT coloumn_name FROM table_name ORDER BY table_name;.// assending.
+         SELECT Name FROM student ORDER BY Name;  // assending.
+
+      1. First go to table.  // coloumn with related data.
+      2. = SELECT coloumn_name, coloumn_name, coloumn_name FROM table_name ORDER BY coloumn_name;
+         SELECT Name, GPA, Age FROM student ORDER BY Name;
+
+
+   Dessending Way : Z to A, 9 to 1: ----------------
+      1. First go to table. 
+      2. = SELECT , coloumn_name, coloumn_name, coloumn_name FROM table_name ORDER BY coloumn_name DESC; 
+         SELECT Name, GPA, Age FROM student ORDER BY Name DESC; 
+
+MySQL Operator : -----------------------------------------------------------------------------
+    Arithmetic operator : + - * / %
+    Logical operator :  AND  OR    NOT   IN 
+    Comperission operator : = != > < >= <= BETWEEN
+
+Arithmetic operator : -------------------------------------------------------------------------
+   1. First go to table. 
+   2. = SELECT 5 + 2;
+
+
+Comperission operator : Find data using Comperission  operator :  -----------------------------
+  1. First go to table.
+  2. = SELECT coloumn_name FROM table_name WHERE coloumn_name ="Coloumn_value";
+     SELECT City FROM studunt WHERE Gender ="Male";
+     SELECT Name FROM studunt WHERE Age > 24;
+     SELECT DISTINCT Name FROM studunt WHERE Age > 24; // for remove duplicate value.
+     SELECT DISTINCT Name FROM studunt WHERE Age > 24 ORDER BY Name; // With assending .
+     SELECT DISTINCT Name FROM studunt WHERE Age > 24 ORDER BY Name DESC; // With Deassending.
+     SELECT * FROM studunt WHERE Age > 24; // for see all data.
+     SELECT Roll, Name, Gender, GPA FROM studunt WHERE Roll !=104;
+
+Logical operator : -----------------------------------------------------------------------------
+  1. First go to table.
+     OR & AND operator : ----------------------
+  2. = SELECT * FROM studunt WHERE Age >= 22 OR GPA >=3.20; // or.
+     = SELECT * FROM studunt WHERE Age >= 25 AND GPA >= 3.50; // and.
+     = SELECT * FROM studunt WHERE City="Kurigram" AND (Age >= 24 OR GPA >= 3.50) // and, or.
+     = SELECT * FROM studunt WHERE City="Kurigram" OR City="Dhaka" OR City="Bhurungamari"; // multiple or.
+     
+   IN Operator : IN is alternative of multiple or operater : ----------- 
+     = SELECT * FROM studunt WHERE City IN ('Kurigram', 'Dhaka', 'Rangpur');
+
+   NOT IN Operator : NOT IN is as like as not equal.: ----------- 
+     = SELECT * FROM studunt WHERE City NOT IN ('Kurigram', 'Dhaka', 'Rangpur');
+  
+   Like Operator : NOT IN is as like as not equal.: ----------- 
+     = SELECT * FROM studunt WHERE Name LIKE "S%"; // start with s. 
+     = SELECT * FROM studunt WHERE Name LIKE "%S";  // end with s. 
+     = SELECT * FROM studunt WHERE Name LIKE "%S%"; //  middle with s.
+     = SELECT * FROM studunt WHERE Name LIKE '_o%'; // 1st 1 can be anything.but 2nd must be o. 
+     = SELECT * FROM studunt WHERE Name LIKE '__o%'; // 1st 2 can be anything.but 3nd must be o. 
+     = SELECT * FROM studunt WHERE Name LIKE '%e_'; // Last 1 can be anything. but last 2nd must be  e. 
+
+For change Table coloumn Name Temporally Using AS: ------------------
+
+    = SELECT Previous_name AS New_name, Previous_name AS New_name FROM studunt;
+    SELECT Roll AS ID, Name AS 'First Name' FROM studunt;
+
+
+SQL Constrains : ------------------------------------------------------------------
+    1. NOT NULL - it's like requiered field. if we use it without insert data we can't add data in table. 
+    2. UNIQUE - does not allow to insert a dublicate value in a coloumn.
+    3. PRIMARY KEY - NOT NULL + UNIQUE.
+    4. CHECK - 
+    5. DEFAULT -
+
+NOT NULL : ----------------------------------------------------------------------------
+
+   CREATE TABLE teacher (
+      ID int NOT NULL AUTO_INCREMENT, // we can't add data without insert id.
+      Name varchar(15) NOT NULL, // we can't add data without insert name.
+      Salary double(10,2),
+      PRIMARY KEY(ID)
+   );
+
+   = INSERT INTO teacher(ID, Name, Salary)
+   = VALUES(1000, "Alok pande", 25000);
+
+   = INSERT INTO teacher(Name, Salary)
+   = VALUES("babul pande", 45000); // not showing an error beacouse we use auto increment.
+
+   = INSERT INTO teacher(Name) 
+   = VALUES("Rashed pande"); // it will not show an error beacouse we gave name.
+
+   = INSERT INTO teacher(Salary)
+   = VALUES(45000); // It will show an error beacause we don't give any name.
+
+Update table data or update record : ---------------------------------------------------------------
+   = UPDATE table_name SET coloumn_name=32000 WHERE Condition;
+   UPDATE teacher SET Salary=32000 WHERE ID=1002;
+   UPDATE teacher SET Name='Rashed Abul' WHERE ID=1002;
+   UPDATE teacher SET Salary= Salary+5000 WHERE Salary > 1000;
+
+DELETE Statement in SQL : --------------------------------------------------------------------------
+
+   = DELETE FROM table_name WHERE Condition; 
+   DELETE FROM teacher WHERE ID=1002; // single row delete.
+   DELETE FROM teacher WHERE ID > 1002; // miltiple row delete.
+
+Function in Mysql : -------------------------------------------------------------------------------
+
+    .UPPER()
+    .LOWER()
+    .CONCAT()
+    .POW()
+    .GREATEST()
+    .LEAST()
+    .LOG()
+    .LOG10()
+    .EXP()
+    .RAND()
+    .TRUNCATE
+
+  UPPER Function : ------------------------------------------------------------------------
+    1. First go to table.
+    2. = SELECT UPPER ("Give here string data");
+       SELECT UPPER ("I am Tariful Islam");
+    2. = SELECT UPPER(coloumn_name) FROM table_name;
+       SELECT UPPER(city) FROM studunt;
+    2. = SELECT UPPER(coloumn_name) AS New_name FROM table_name;
+       SELECT UPPER(city) AS Sohor FROM studunt;
+
+
+  LOWER Function : ------------------------------------------------------------------------
+     = SELECT LOWER ("I am Tariful Islam");
+     = SELECT LOWER(city) FROM studunt;
+     = SELECT LOWER(city) AS Sohor FROM studunt;
+
+  CONCAT Function : ------------------------------------------------------------------------
+     = SELECT CONCAT("Welcome to", " Database");
+     = SELECT CONCAT(Name, ' is ', Age, ' years old') FROM studunt;
+     = SELECT CONCAT(Name, ' is ', Age, ' years old') AS Student_dtls FROM  studunt; FF
+
+  POW Function : its like a qube----------------------------------------------------------
+     = SELECT POW(2,3);
+
+  GREATEST Function : biggest number -----------------------------------------------------
+     = SELECT GREATEST(11, 22, 55,33,70);
+
+  LEAST Function : smallest number --------------------------------------------------------
+     = SELECT LEAST(11, 22, 55,33,70);
+
+  LOG Function : ------------------------------------------------------------------------
+     = SELECT LOG(2);
+
+  LOG10 Function : ------------------------------------------------------------------------
+     = SELECT LOG10(2);
+
+  EXP Function : ------------------------------------------------------------------------
+     = SELECT EXP(3);
+
+  RAND Function : it make random number -------------------------------------------------
+     = SELECT RAND();
+
+  TRUNCATE : it control float or decimal number ------------------------------------------
+     = SELECT TRUNCATE(10.256,2);
+     = SELECT TRUNCATE(LOG(2),2);
+
+Group Function : ------------------------------------------------------------------------
+   .AVG - Show avarage.
+   .COUNT - Show total row number.
+   .MAX - Show max number.
+   .MIN - Show minimum number.
+   .SUM - Show total number do sumation,
+
+  = SELECT COUNT(*) FROM player; 
+  = SELECT MAX(GPA) FROM player;
+  = SELECT MIN(GPA) FROM player;
+  = SELECT SUM(Age) FROM player;
+  = SELECT AVG(Age) FROM player;
+  = SELECT SUM(Age), AVG(Age) FROM player;
+  = SELECT  COUNT(*),MAX(Age), MIN(Age), SUM(Age), AVG(Age) FROM player;
+  = SELECT MIN(Age) FROM player WHERE Gender="Female";
+  = SELECT Roll, Name, City, MIN(Age) FROM player WHERE Gender="Female";
+
+Sub Query : when we insert one query in anather query thats called sub query : ---------------
+
+   = SELECT AVG(Age) FROM player; // 27.7778; // query - 1.
+   = SELECT * FROM player WHERE Age > 27.7778; // query - 2.
+
+   = SELECT * FROM player WHERE Age > (SELECT AVG(Age) FROM player); 2 query in - 1.
+
+ALTER TABLE : can add coloumn, delete coloumn, rename coloumn : -----------------------------
+   = ALTER TABLE player ADD Hobby varchar(20);
+
+   = ALTER TABLE player CHANGE Hobby Sokh varchar(15);
+   = ALTER TABLE player DROP COLUMN Sokh;
+
+Update Data in coloumn : ---------------------------------------------------------------------
+
+   = UPDATE player SET Department="CSE" WHERE Roll = 101; //  OR rename all manually.
+
+
+
+
+
+
+
+
+
