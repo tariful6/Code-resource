@@ -1,0 +1,47 @@
+Gihub Essential comand --------------------
+    For git initialization --- git init
+    Fot add --- git add .
+    For Commit --- git commit -m "any commit"
+    For send code and set branch --- git push -u origin main // only one time we use it.
+    For send code --- git push
+    Cor clone git repo --- git clone repo link
+    NB: Branch is a one kind of storage.
+    For check branch --- git branch
+    For rename branch --- git branch -M Anyname 
+    For create branch --- git branch anyname
+    For switch branch --- git checkout branchName
+    For delete branch --- git branch -d branchName
+    NB: for delete branch must we have to switch anather branch.
+    For create branch and checkout --- git checkout -b branchName
+    For check repo Link --- git remote -v
+    For check commit --- git log  // press q to skip
+    For check commit status --- git log --online
+
+
+For contribution processs -----------------------------------
+  - Go to main repo > click on Fork > create fork // it will be copy in your github acc.
+  - Clone fork repo code from your github acc
+      git clone repo link
+      cd project name
+      code .
+  - Check and review code.
+  - create a branch an give branch name related to your contribute type or feature.
+      git checkout -b blog
+  - continue your work.
+  - git add .
+  - git commit -am 'commit'// use when we modify code in existing file.
+  - git push origin branch name
+  - For merge repo - goto repository - click > compare & pull request > add title > 
+      add description > create pull request.
+  - Goto main auther github account > goto repo > click Merge pull request > confirm merge.
+  - Goto your github account > goto repo > Sync fork > update brunch.
+  - git pull
+
+Git Revert , Reset _Soft, Hard ------- Learn letter.
+
+
+
+
+- Connect github to vs code -----------------------------
+      git config --global user.email "you@example.com"
+      git config --global user.name "Your Name"
