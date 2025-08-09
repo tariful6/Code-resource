@@ -1,0 +1,54 @@
+ - Install any browser.
+ - install vs code.
+ - install git bash. 
+ - install node. 
+ - For Configer VSCode add all extentions : ------------------  
+	open in browser
+	Auto Import
+	Auto Import - ES6, TS, JSX, TSX
+	Auto Import - ES6 & TS
+	Auto Rename Tag
+
+	Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets
+	Bootstrap v4 and v5 snippets YEAR 2020
+
+	Bracket Pair Colorization Toggler
+	ESLint
+	Code Spell Checker
+	HTML-LESS-Class-Completion
+	CodeSnap
+
+	Path Intellisense
+	IntelliSense for CSS class
+	JavaScript (ES6) code snippets
+	Learn with Sumit Theme
+	Live Server
+	Material Icon Theme
+	npm Intellisense
+	Prettier - Code formatter
+	React Extension Pack
+	Search node_modules
+	Reactjs code snippets
+	Tailwind CSS IntelliSense
+
+	
+	C/C++
+	C/C++ Extension Pack
+	C/C++ Themes
+
+
+	Code Runner
+	Python
+
+
+ - Configer VSCode settings : ------------------  
+      For Auto save ---- sitting > setting > auto save  > on Fockus change....
+      For copy line Down ---- setting > keyboard-shortcuts > Copy Line Down > add - ctrl + shift + d ..
+      For auto complete -- goto > Emmet : Trigger Expansion On Tab > checked.
+ 
+- For setup firacode ------------------------------
+      Install firacode fonts
+      Add those config in setting.json ----
+             "editor.fontFamily": "'Fira Code',Consolas, 'Courier New', monospace",
+             "editor.fontLigatures": true
+         
